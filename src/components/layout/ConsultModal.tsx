@@ -214,7 +214,11 @@ export function ConsultModal() {
               </button>
 
               <p className="text-center text-xs text-ash">
-                Yoki qo&apos;ng&apos;iroq qiling:{" "}
+                Savollar uchun:{" "}
+                <a href={site.contacts.telegramSupport} target="_blank" rel="noopener noreferrer" className="text-smoke underline-offset-4 hover:underline">
+                  {site.contacts.telegramSupportLabel}
+                </a>
+                {" · Tel: "}
                 <a href={site.contacts.phoneHref} className="text-smoke underline-offset-4 hover:underline">
                   {site.contacts.phone}
                 </a>

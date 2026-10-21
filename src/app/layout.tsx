@@ -58,7 +58,18 @@ const jsonLd = {
       description: site.description,
       image: `${site.url}/opengraph-image.png`,
       telephone: site.contacts.phone,
-      address: { "@type": "PostalAddress", streetAddress: site.contacts.address },
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: site.contacts.addressFull,
+        addressLocality: "Tashkent",
+        postalCode: "100105",
+        addressCountry: "UZ",
+      },
+      sameAs: [
+        site.contacts.telegram,
+        site.contacts.instagram,
+        site.contacts.youtube,
+      ],
     },
     {
       "@type": "WebSite",

@@ -71,25 +71,44 @@ export function Footer() {
           </nav>
 
           <div className="sm:col-span-2 lg:col-span-3">
-            <h3 className="mb-4 text-xs font-medium uppercase tracking-[0.14em] text-ash">Aloqa</h3>
+            <h3 className="mb-4 text-xs font-medium uppercase tracking-[0.14em] text-ash">Aloqa & Ijtimoiy Tarmoqlar</h3>
             <ul className="flex flex-col gap-2.5">
               <li>
-                <a href={c.phoneHref} className={linkCls}>
-                  {c.phone}
+                <a href={c.phoneHref} className="text-sm font-medium text-fog transition-colors hover:text-white">
+                  📞 {c.phone}
                 </a>
               </li>
               <li>
-                <a href={`mailto:${c.email}`} className={linkCls}>
-                  {c.email}
+                <a href={c.telegramSupport} target="_blank" rel="noopener noreferrer" className={linkCls}>
+                  Savollar uchun: <span className="text-fog hover:text-white">{c.telegramSupportLabel}</span>
                 </a>
               </li>
               <li>
                 <a href={c.telegram} target="_blank" rel="noopener noreferrer" className={linkCls}>
-                  Telegram · {c.telegramLabel}
+                  Telegram kanal: <span className="text-fog hover:text-white">{c.telegramLabel}</span>
                 </a>
               </li>
-              <li className="text-sm text-smoke">{c.address}</li>
-              <li className="text-sm text-ash">{c.hours}</li>
+              <li>
+                <a href={c.instagram} target="_blank" rel="noopener noreferrer" className={linkCls}>
+                  Instagram: <span className="text-fog hover:text-white">{c.instagramLabel}</span>
+                </a>
+              </li>
+              <li>
+                <a href={c.youtube} target="_blank" rel="noopener noreferrer" className={linkCls}>
+                  YouTube: <span className="text-fog hover:text-white">{c.youtubeLabel}</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={c.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-1 block text-xs leading-relaxed text-smoke transition-colors hover:text-white"
+                >
+                  📍 {c.address}
+                </a>
+              </li>
+              <li className="text-xs text-ash">🕒 {c.hours}</li>
             </ul>
           </div>
         </div>

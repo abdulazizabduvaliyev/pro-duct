@@ -267,9 +267,22 @@ function MobileMenu() {
           >
             Konsultatsiya olish
           </button>
-          <a href={site.contacts.phoneHref} className="text-center text-sm text-smoke transition-colors hover:text-white">
-            {site.contacts.phone}
+          <a href={site.contacts.phoneHref} className="text-center text-sm font-medium text-fog transition-colors hover:text-white">
+            📞 {site.contacts.phone}
           </a>
+          <div className="flex items-center justify-center gap-3 text-xs text-smoke">
+            <a href={site.contacts.telegram} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-white">
+              Telegram
+            </a>
+            <span className="text-ash/60">·</span>
+            <a href={site.contacts.instagram} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-white">
+              Instagram
+            </a>
+            <span className="text-ash/60">·</span>
+            <a href={site.contacts.youtube} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-white">
+              YouTube
+            </a>
+          </div>
         </div>
       </div>
     </div>

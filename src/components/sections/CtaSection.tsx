@@ -50,10 +50,19 @@ export function CtaSection() {
             </Button>
           </div>
 
-          <div data-reveal className="mt-8 flex flex-col items-center justify-center gap-x-8 gap-y-3 text-sm text-smoke sm:mt-10 sm:flex-row sm:flex-wrap">
-            <a href={site.contacts.phoneHref} className="inline-flex items-center gap-2 transition-colors hover:text-white">
+          <div data-reveal className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-smoke sm:mt-10 sm:gap-x-8 sm:text-sm">
+            <a href={site.contacts.phoneHref} className="inline-flex items-center gap-2 font-medium text-fog transition-colors hover:text-white">
               <Phone className="size-4" strokeWidth={1.8} />
               {site.contacts.phone}
+            </a>
+            <a
+              href={site.contacts.telegramSupport}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 transition-colors hover:text-white"
+            >
+              <Send className="size-4" strokeWidth={1.8} />
+              Savollar: {site.contacts.telegramSupportLabel}
             </a>
             <a
               href={site.contacts.telegram}
@@ -62,7 +71,23 @@ export function CtaSection() {
               className="inline-flex items-center gap-2 transition-colors hover:text-white"
             >
               <Send className="size-4" strokeWidth={1.8} />
-              {site.contacts.telegramLabel}
+              Kanal: {site.contacts.telegramLabel}
+            </a>
+            <a
+              href={site.contacts.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 transition-colors hover:text-white"
+            >
+              Instagram
+            </a>
+            <a
+              href={site.contacts.youtube}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 transition-colors hover:text-white"
+            >
+              YouTube
             </a>
           </div>
         </div>
