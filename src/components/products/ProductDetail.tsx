@@ -86,8 +86,8 @@ export function ProductDetail({ product }: { product: Product }) {
 
   return (
     <>
-      <div ref={root} className="mx-auto max-w-[1440px] px-5 pb-8 pt-24 md:px-10 md:pt-28">
-        <nav data-hero="crumb" aria-label="Yo'l" className="mb-8 flex flex-wrap items-center gap-1.5 text-[13px] text-ash">
+      <div ref={root} className="mx-auto max-w-[1440px] px-4 pb-8 pt-20 sm:px-6 sm:pt-24 md:px-10 md:pt-28">
+        <nav data-hero="crumb" aria-label="Yo'l" className="mb-6 flex flex-wrap items-center gap-1.5 text-xs text-ash sm:mb-8 sm:text-[13px]">
           <TransitionLink href="/catalog" className="transition-colors hover:text-white">
             Katalog
           </TransitionLink>
@@ -99,12 +99,12 @@ export function ProductDetail({ product }: { product: Product }) {
           <span className="text-smoke">{product.name}</span>
         </nav>
 
-        <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
+        <div className="grid gap-8 lg:grid-cols-12 lg:gap-14">
           <div data-hero="stage" className="lg:sticky lg:top-28 lg:col-span-7 lg:self-start">
             <ProductGallery product={product} tone={color?.value} index={slide} onIndex={setSlide} />
           </div>
 
-          <div className="flex flex-col gap-7 lg:col-span-5">
+          <div className="flex flex-col gap-6 sm:gap-7 lg:col-span-5">
             <div data-hero="info">
               <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.14em] text-ash">
                 <TransitionLink href={`/catalog?brand=${product.brand}`} className="transition-colors hover:text-white">
@@ -116,21 +116,21 @@ export function ProductDetail({ product }: { product: Product }) {
                   </span>
                 ) : null}
               </div>
-              <h1 className="mt-3 text-[clamp(2.2rem,5vw,3.6rem)] font-semibold leading-[1.02] tracking-[-0.04em]">
+              <h1 className="mt-2 text-[clamp(1.8rem,5vw,3.6rem)] font-semibold leading-[1.05] tracking-[-0.04em] sm:mt-3">
                 {product.name}
               </h1>
-              <p className="mt-3 text-lg text-smoke">{product.tagline}</p>
+              <p className="mt-2 text-base text-smoke sm:mt-3 sm:text-lg">{product.tagline}</p>
             </div>
 
-            <div data-hero="info" className="flex flex-wrap items-center justify-between gap-4">
+            <div data-hero="info" className="flex flex-wrap items-center justify-between gap-3 sm:gap-4">
               <Price price={product.price} oldPrice={product.oldPrice} size="lg" />
-              <span className="inline-flex items-center gap-2 rounded-full border border-line bg-white/4 px-3.5 py-1.5 text-xs font-medium text-fog/90">
+              <span className="inline-flex items-center gap-2 rounded-full border border-line bg-white/4 px-3 py-1 text-xs font-medium text-fog/90 sm:px-3.5 sm:py-1.5">
                 <span className={cn("size-1.5 rounded-full", dot[product.stock])} />
                 {stockLabel[product.stock]}
               </span>
             </div>
 
-            <p data-hero="info" className="leading-relaxed text-smoke">
+            <p data-hero="info" className="text-sm leading-relaxed text-smoke sm:text-base">
               {product.description}
             </p>
 
@@ -139,7 +139,7 @@ export function ProductDetail({ product }: { product: Product }) {
                 <p className="text-sm text-smoke">
                   Rang: <span className="font-medium text-fog">{color?.name}</span>
                 </p>
-                <div className="mt-3 flex flex-wrap gap-3" role="radiogroup" aria-label="Rang">
+                <div className="mt-2.5 flex flex-wrap gap-2.5 sm:mt-3 sm:gap-3" role="radiogroup" aria-label="Rang">
                   {product.colors.map((c, i) => (
                     <button
                       key={c.name}
@@ -149,7 +149,7 @@ export function ProductDetail({ product }: { product: Product }) {
                       aria-label={c.name}
                       onClick={() => setColorIdx(i)}
                       className={cn(
-                        "size-10 rounded-full border-2 p-0.5 transition-all duration-300",
+                        "size-9 rounded-full border-2 p-0.5 transition-all duration-300 sm:size-10",
                         i === colorIdx ? "border-white" : "border-transparent hover:border-white/40",
                       )}
                     >
@@ -161,24 +161,24 @@ export function ProductDetail({ product }: { product: Product }) {
             ) : null}
 
             <div data-hero="info" className="flex flex-col gap-3">
-              <div className="flex items-center gap-3">
-                <div className="flex h-14 items-center rounded-full border border-line bg-white/4">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="flex h-12 items-center rounded-full border border-line bg-white/4 sm:h-14">
                   <button
                     type="button"
                     onClick={() => setQty((n) => Math.max(1, n - 1))}
                     aria-label="Kamaytirish"
-                    className="flex size-12 items-center justify-center text-smoke transition-colors hover:text-white"
+                    className="flex size-10 items-center justify-center text-smoke transition-colors hover:text-white sm:size-12"
                   >
-                    <Minus className="size-4" />
+                    <Minus className="size-3.5 sm:size-4" />
                   </button>
-                  <span className="min-w-8 text-center text-[15px] font-medium tabular-nums">{qty}</span>
+                  <span className="min-w-7 text-center text-sm font-medium tabular-nums sm:min-w-8 sm:text-[15px]">{qty}</span>
                   <button
                     type="button"
                     onClick={() => setQty((n) => Math.min(20, n + 1))}
                     aria-label="Ko'paytirish"
-                    className="flex size-12 items-center justify-center text-smoke transition-colors hover:text-white"
+                    className="flex size-10 items-center justify-center text-smoke transition-colors hover:text-white sm:size-12"
                   >
-                    <Plus className="size-4" />
+                    <Plus className="size-3.5 sm:size-4" />
                   </button>
                 </div>
 
@@ -188,13 +188,13 @@ export function ProductDetail({ product }: { product: Product }) {
                   onClick={add}
                   disabled={!buyable}
                   wrapperClassName="flex-1"
-                  className="w-full"
-                  icon={<ShoppingBag className="size-[18px]" />}
+                  className="w-full text-xs sm:text-sm"
+                  icon={<ShoppingBag className="size-4 sm:size-[18px]" />}
                 >
                   {buyable ? (product.stock === "preorder" ? "Buyurtma berish" : "Savatga qo'shish") : "Tugagan"}
                 </Button>
 
-                <WishlistButton slug={product.slug} name={product.name} className="size-14 shrink-0" />
+                <WishlistButton slug={product.slug} name={product.name} className="size-12 shrink-0 sm:size-14" />
               </div>
 
               <OpenConsult variant="secondary" size="lg" subject={`${product.name}${color ? ` (${color.name})` : ""}`} wrapperClassName="w-full" className="w-full">

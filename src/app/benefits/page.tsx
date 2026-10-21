@@ -111,7 +111,7 @@ const STEPS = [
 
 export default function BenefitsPage() {
   return (
-    <div className="mx-auto max-w-[1440px] px-5 pb-28 pt-24 md:px-10 md:pt-28">
+    <div className="mx-auto max-w-[1440px] px-4 pb-24 pt-20 sm:px-6 sm:pt-24 md:px-10 md:pb-28 md:pt-28">
       {/* ── Breadcrumb ── */}
       <nav aria-label="Yo'l" className="mb-6 flex items-center gap-1.5 text-xs text-ash">
         <TransitionLink href="/" className="transition-colors hover:text-white">
@@ -122,13 +122,13 @@ export default function BenefitsPage() {
       </nav>
 
       {/* ── Page Header ── */}
-      <div className="mb-12 flex flex-col items-start gap-4 md:mb-16">
-        <span className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium tracking-wide text-smoke">
+      <div className="mb-10 flex flex-col items-start gap-3 sm:gap-4 md:mb-16">
+        <span className="glass inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium tracking-wide text-smoke sm:px-4">
           <Sparkles className="size-3.5 text-white" />
           PRO DUCT Standartlari
         </span>
 
-        <h1 className="text-3xl font-semibold tracking-[-0.035em] text-fog sm:text-4xl md:text-5xl lg:text-6xl">
+        <h1 className="text-[clamp(1.9rem,6vw,3.75rem)] font-semibold leading-[1.08] tracking-[-0.035em] text-fog">
           Nega aynan PRO DUCT?
         </h1>
 
@@ -138,19 +138,19 @@ export default function BenefitsPage() {
       </div>
 
       {/* ── Trust Stats Row ── */}
-      <div className="mb-16 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+      <div className="mb-14 grid grid-cols-2 gap-2.5 sm:gap-4 md:mb-16 lg:grid-cols-4">
         {TRUST_STATS.map((stat) => (
           <div
             key={stat.label}
-            className="rounded-3xl border border-line bg-panel/60 p-5 text-center backdrop-blur-md sm:p-6"
+            className="rounded-2xl border border-line bg-panel/60 p-4 text-center backdrop-blur-md sm:rounded-3xl sm:p-6"
           >
-            <p className="font-mono text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
+            <p className="font-mono text-xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
               {stat.value}
             </p>
-            <h3 className="mt-2 text-xs font-semibold text-fog sm:text-sm">
+            <h3 className="mt-1.5 text-xs font-semibold text-fog sm:mt-2 sm:text-sm">
               {stat.label}
             </h3>
-            <p className="mt-1 text-[11px] text-smoke sm:text-xs">
+            <p className="mt-0.5 text-[10px] text-smoke sm:mt-1 sm:text-xs">
               {stat.note}
             </p>
           </div>
@@ -168,15 +168,15 @@ export default function BenefitsPage() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
           {MAIN_BENEFITS.map((item) => (
             <div
               key={item.title}
-              className="group flex flex-col justify-between rounded-3xl border border-line bg-panel/60 p-6 transition-all duration-300 hover:border-white/20 hover:bg-panel"
+              className="group flex flex-col justify-between rounded-2xl border border-line bg-panel/60 p-5 transition-all duration-300 hover:border-white/20 hover:bg-panel sm:rounded-3xl sm:p-6"
             >
               <div>
                 <div className="flex items-center justify-between">
-                  <span className="flex size-11 items-center justify-center rounded-2xl border border-line bg-white/5 text-white transition-all duration-300 group-hover:scale-105 group-hover:bg-white group-hover:text-black">
+                  <span className="flex size-10 items-center justify-center rounded-xl border border-line bg-white/5 text-white transition-all duration-300 group-hover:scale-105 group-hover:bg-white group-hover:text-black sm:size-11 sm:rounded-2xl">
                     <item.icon className="size-5" />
                   </span>
                   <span className="rounded-full border border-line bg-white/5 px-2.5 py-0.5 font-mono text-[10px] text-ash">
@@ -184,7 +184,7 @@ export default function BenefitsPage() {
                   </span>
                 </div>
 
-                <h3 className="mt-5 text-base font-semibold tracking-tight text-fog transition-colors group-hover:text-white">
+                <h3 className="mt-4 text-base font-semibold tracking-tight text-fog transition-colors group-hover:text-white sm:mt-5">
                   {item.title}
                 </h3>
 
@@ -198,8 +198,8 @@ export default function BenefitsPage() {
       </div>
 
       {/* ── How It Works (3 Steps) ── */}
-      <div className="mb-20 rounded-3xl border border-line bg-panel/70 p-6 backdrop-blur-md sm:p-10">
-        <div className="mb-10 text-center">
+      <div className="mb-16 rounded-2xl border border-line bg-panel/70 p-5 backdrop-blur-md sm:mb-20 sm:rounded-3xl sm:p-10">
+        <div className="mb-8 text-center sm:mb-10">
           <span className="text-[11px] font-medium uppercase tracking-wider text-ash">
             Oddiy va Shaffof
           </span>
@@ -211,17 +211,17 @@ export default function BenefitsPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
           {STEPS.map((s) => (
             <div
               key={s.step}
-              className="relative flex flex-col justify-between rounded-2xl border border-line/60 bg-black/30 p-6"
+              className="relative flex flex-col justify-between rounded-2xl border border-line/60 bg-black/30 p-5 sm:p-6"
             >
               <div>
                 <span className="font-mono text-2xl font-bold text-ash/40">
                   {s.step}
                 </span>
-                <h3 className="mt-3 text-base font-semibold text-white">
+                <h3 className="mt-2.5 text-base font-semibold text-white sm:mt-3">
                   {s.title}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-smoke">
@@ -234,16 +234,16 @@ export default function BenefitsPage() {
       </div>
 
       {/* ── Bottom Call To Action ── */}
-      <div className="relative overflow-hidden rounded-3xl border border-line bg-gradient-to-b from-[#141418] to-ink p-8 text-center sm:p-14">
+      <div className="relative overflow-hidden rounded-2xl border border-line bg-gradient-to-b from-[#141418] to-ink p-6 text-center sm:rounded-3xl sm:p-14">
         <div className="relative z-10 mx-auto max-w-xl">
-          <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
+          <h2 className="text-xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
             Orzuingizdagi texnikani tanlashga tayyormisiz?
           </h2>
           <p className="mt-3 text-xs leading-relaxed text-smoke sm:text-sm">
             Katalogimizdagi yuzlab original mahsulotlar bilan tanishing yoki o&apos;zingizga mos maxsus geyming kompyuterini hisoblang.
           </p>
 
-          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+          <div className="mt-7 flex flex-col justify-center gap-2.5 sm:mt-8 sm:flex-row sm:gap-3">
             <TransitionLink
               href="/catalog"
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-xs font-semibold text-black transition-all hover:bg-white/90 active:scale-[0.98]"

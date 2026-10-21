@@ -83,16 +83,16 @@ export function ProductGallery({ product, tone, index, onIndex }: Props) {
   const view = ART_VIEWS[index] ?? "front";
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-3 sm:gap-4">
       <div
         ref={stage}
-        className="surface relative aspect-[4/3] overflow-hidden rounded-[36px] [perspective:1100px]"
+        className="surface relative aspect-[4/3] overflow-hidden rounded-[24px] [perspective:1100px] sm:rounded-[36px]"
       >
         <div
           aria-hidden
           className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[80%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(255_255_255/0.1),transparent)]"
         />
-        <div ref={inner} className="relative h-full w-full p-8 will-change-transform [transform-style:preserve-3d] md:p-12">
+        <div ref={inner} className="relative h-full w-full p-6 will-change-transform [transform-style:preserve-3d] sm:p-8 md:p-12">
           <div className="relative h-full w-full">
             <ProductMedia
               product={product}
@@ -111,17 +111,17 @@ export function ProductGallery({ product, tone, index, onIndex }: Props) {
               type="button"
               onClick={() => go(index - 1)}
               aria-label="Oldingi rasm"
-              className="glass absolute left-4 top-1/2 flex size-11 -translate-y-1/2 items-center justify-center rounded-full text-fog transition-colors hover:bg-white/15"
+              className="glass absolute left-2 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full text-fog transition-colors hover:bg-white/15 sm:left-4 sm:size-11"
             >
-              <ChevronLeft className="size-5" />
+              <ChevronLeft className="size-4 sm:size-5" />
             </button>
             <button
               type="button"
               onClick={() => go(index + 1)}
               aria-label="Keyingi rasm"
-              className="glass absolute right-4 top-1/2 flex size-11 -translate-y-1/2 items-center justify-center rounded-full text-fog transition-colors hover:bg-white/15"
+              className="glass absolute right-2 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full text-fog transition-colors hover:bg-white/15 sm:right-4 sm:size-11"
             >
-              <ChevronRight className="size-5" />
+              <ChevronRight className="size-4 sm:size-5" />
             </button>
           </>
         ) : null}

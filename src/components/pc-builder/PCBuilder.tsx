@@ -264,7 +264,7 @@ export function PCBuilder() {
         </div>
 
         {/* Minimal Preset Pills */}
-        <div className="flex flex-wrap items-center gap-2 pt-1">
+        <div className="no-scrollbar -mx-4 flex items-center gap-2 overflow-x-auto px-4 pt-1 sm:mx-0 sm:flex-wrap sm:px-0">
           {PRESETS.map((preset) => {
             const isActive = Object.entries(preset.parts).every(
               ([cat, id]) => selected[cat as PartCategory] === id,
@@ -275,7 +275,7 @@ export function PCBuilder() {
                 key={preset.id}
                 type="button"
                 onClick={() => applyPreset(preset)}
-                className={`group flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-medium transition-all ${
+                className={`group flex shrink-0 items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs font-medium transition-all sm:px-4 sm:py-2 ${
                   isActive
                     ? "border-white bg-white text-black shadow-md"
                     : "border-line bg-panel text-smoke hover:border-white/20 hover:text-white"
@@ -298,12 +298,12 @@ export function PCBuilder() {
       </div>
 
       {/* ── 2. Main Builder: Left (3D PC Showcase) & Right (Clean Selection) ── */}
-      <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
         {/* Left Column: 3D PC Visualizer & Instant Checkout (Sticky) */}
         <div className="lg:col-span-5">
-          <div className="sticky top-28 flex flex-col gap-4">
+          <div className="flex flex-col gap-4 lg:sticky lg:top-28">
             {/* 3D Model Card */}
-            <div className="relative overflow-hidden rounded-3xl border border-line bg-panel p-5 shadow-2xl">
+            <div className="relative overflow-hidden rounded-3xl border border-line bg-panel p-4 shadow-2xl sm:p-5">
               {/* Top Bar inside 3D Card */}
               <div className="flex items-center justify-between">
                 <div>
@@ -335,13 +335,13 @@ export function PCBuilder() {
               </div>
 
               {/* 3D WebGL Canvas */}
-              <div className="relative my-4 aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/5 bg-gradient-to-b from-[#141418] to-[#08080a]">
+              <div className="relative my-3 aspect-[16/10] w-full max-h-[300px] overflow-hidden rounded-2xl border border-white/5 bg-gradient-to-b from-[#141418] to-[#08080a] sm:my-4 sm:aspect-[4/3] sm:max-h-none">
                 <PCCase3D activeRgb={activeRgb} />
               </div>
 
               {/* Quick Specs Glance */}
-              <div className="grid grid-cols-3 gap-2 border-t border-line/60 pt-3">
-                <div className="rounded-xl border border-line/40 bg-black/30 p-2 text-center">
+              <div className="grid grid-cols-3 gap-1.5 border-t border-line/60 pt-3 sm:gap-2">
+                <div className="rounded-xl border border-line/40 bg-black/30 p-1.5 text-center sm:p-2">
                   <span className="text-[9px] uppercase tracking-wider text-ash">
                     Videokarta
                   </span>
@@ -539,11 +539,11 @@ export function PCBuilder() {
           </div>
 
           {/* Minimal Tab Switcher */}
-          <div className="flex items-center rounded-full border border-line bg-black/40 p-1">
+          <div className="flex w-full items-center rounded-full border border-line bg-black/40 p-1 sm:w-auto">
             <button
               type="button"
               onClick={() => setBenchmarkTab("games")}
-              className={`flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold transition-all ${
+              className={`flex flex-1 items-center justify-center gap-1.5 rounded-full px-3 py-2 text-[11px] font-semibold transition-all sm:flex-initial sm:px-4 sm:text-xs ${
                 benchmarkTab === "games"
                   ? "bg-white text-black shadow-sm"
                   : "text-smoke hover:text-white"
@@ -551,12 +551,12 @@ export function PCBuilder() {
             >
               <Gamepad2 className="size-3.5" />
               <span>Top 10 O&apos;yinlar</span>
-              <span className="font-mono text-[11px] opacity-75">({avgGameScore}%)</span>
+              <span className="font-mono text-[10px] opacity-75 sm:text-[11px]">({avgGameScore}%)</span>
             </button>
             <button
               type="button"
               onClick={() => setBenchmarkTab("render")}
-              className={`flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold transition-all ${
+              className={`flex flex-1 items-center justify-center gap-1.5 rounded-full px-3 py-2 text-[11px] font-semibold transition-all sm:flex-initial sm:px-4 sm:text-xs ${
                 benchmarkTab === "render"
                   ? "bg-white text-black shadow-sm"
                   : "text-smoke hover:text-white"
@@ -564,7 +564,7 @@ export function PCBuilder() {
             >
               <Flame className="size-3.5" />
               <span>3D Render & Montaj</span>
-              <span className="font-mono text-[11px] opacity-75">({avgRenderScore}%)</span>
+              <span className="font-mono text-[10px] opacity-75 sm:text-[11px]">({avgRenderScore}%)</span>
             </button>
           </div>
         </div>
@@ -572,15 +572,15 @@ export function PCBuilder() {
         {/* Clean Content Grid */}
         <div className="mt-6">
           {benchmarkTab === "games" ? (
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-3.5 md:grid-cols-2 md:gap-4">
               {gameBenchmarks.map((game) => (
                 <div
                   key={game.id}
-                  className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-line/60 bg-black/30 p-3.5 transition-all hover:border-white/20 hover:bg-black/50 sm:p-4"
+                  className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-line/60 bg-black/30 p-3 transition-all hover:border-white/20 hover:bg-black/50 sm:p-4"
                 >
-                  <div className="flex items-center gap-3.5 sm:gap-4">
+                  <div className="flex items-center gap-3 sm:gap-4">
                     {/* Game Cover Art on Left Side */}
-                    <div className="relative aspect-[16/9] w-24 shrink-0 overflow-hidden rounded-xl border border-white/10 bg-[#121217] sm:w-28">
+                    <div className="relative aspect-[16/9] w-20 shrink-0 overflow-hidden rounded-xl border border-white/10 bg-[#121217] sm:w-28">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={game.image}
@@ -662,6 +662,38 @@ export function PCBuilder() {
               ))}
             </div>
           )}
+        </div>
+      </div>
+
+      {/* ── 4. Mobile Floating Bottom Checkout Bar ── */}
+      <div className="fixed inset-x-3 bottom-3 z-40 flex items-center justify-between gap-3 rounded-2xl border border-white/15 bg-panel/95 p-3 shadow-2xl backdrop-blur-xl lg:hidden">
+        <div className="min-w-0">
+          <span className="text-[10px] uppercase tracking-wider text-ash">
+            Jami Qiymat
+          </span>
+          <p className="truncate font-mono text-sm font-bold text-white sm:text-base">
+            {formatPrice(totalPrice)}
+          </p>
+        </div>
+
+        <div className="flex shrink-0 items-center gap-2">
+          <button
+            type="button"
+            onClick={handleCopy}
+            title="Konfiguratsiyani nusxalash"
+            className="flex size-10 items-center justify-center rounded-xl border border-line bg-white/5 text-fog transition-all active:scale-95"
+          >
+            {copied ? <Check className="size-4 text-emerald-400" /> : <Copy className="size-4" />}
+          </button>
+
+          <button
+            type="button"
+            onClick={handleOrder}
+            className="flex items-center gap-1.5 rounded-xl bg-white px-4 py-2.5 text-xs font-semibold text-black transition-all hover:bg-white/90 active:scale-95"
+          >
+            <Send className="size-3.5" />
+            <span>Buyurtma Berish</span>
+          </button>
         </div>
       </div>
     </div>

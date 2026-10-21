@@ -41,35 +41,35 @@ export function Benefits() {
 
   return (
     <section id="benefits" ref={root} className="relative scroll-mt-24 border-y border-line bg-ink">
-      <div className="mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-36">
+      <div className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 md:px-10 md:py-36">
         <SectionHeading
           eyebrow="Afzalliklar"
           title="Xarid — oddiy va ishonchli."
           description="Tanlashdan olishgacha — har bir qadamda yoningizdamiz."
         />
 
-        <ul className="mt-14 grid gap-px overflow-hidden rounded-[28px] border border-line bg-line md:mt-20 md:grid-cols-2 lg:grid-cols-6">
+        <ul className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:rounded-[28px] md:mt-20 md:grid-cols-2 lg:grid-cols-6">
           {benefits.map((b, i) => (
             <li
               key={b.title}
               data-reveal
-              className={`group relative bg-graphite p-7 transition-colors duration-500 hover:bg-panel md:p-9 ${
+              className={`group relative bg-graphite p-5 transition-colors duration-500 hover:bg-panel sm:p-7 md:p-9 ${
                 i < 2 ? "lg:col-span-3" : "lg:col-span-2"
               }`}
             >
-              <span className="flex size-12 items-center justify-center rounded-2xl border border-line bg-white/5 text-fog transition-all duration-500 group-hover:scale-110 group-hover:border-white/25 group-hover:bg-white group-hover:text-black">
-                <b.icon className="size-5" strokeWidth={1.7} />
+              <span className="flex size-10 items-center justify-center rounded-xl border border-line bg-white/5 text-fog transition-all duration-500 group-hover:scale-110 group-hover:border-white/25 group-hover:bg-white group-hover:text-black sm:size-12 sm:rounded-2xl">
+                <b.icon className="size-4.5 sm:size-5" strokeWidth={1.7} />
               </span>
-              <h3 className="mt-8 text-xl font-semibold tracking-tight">{b.title}</h3>
-              <p className="mt-2 max-w-sm text-[15px] leading-relaxed text-smoke">{b.text}</p>
+              <h3 className="mt-5 text-lg font-semibold tracking-tight sm:mt-8 sm:text-xl">{b.title}</h3>
+              <p className="mt-1.5 max-w-sm text-xs leading-relaxed text-smoke sm:mt-2 sm:text-sm md:text-[15px]">{b.text}</p>
             </li>
           ))}
         </ul>
 
-        <div className="mt-12 flex justify-center">
+        <div className="mt-8 flex justify-center sm:mt-12">
           <TransitionLink
             href="/benefits"
-            className="group inline-flex items-center gap-2 rounded-full border border-line bg-white/5 px-6 py-3 text-xs font-medium text-fog transition-all hover:border-white/20 hover:bg-white/10 hover:text-white"
+            className="group inline-flex items-center justify-center gap-2 rounded-full border border-line bg-white/5 px-5 py-2.5 text-center text-xs font-medium text-fog transition-all hover:border-white/20 hover:bg-white/10 hover:text-white sm:px-6 sm:py-3"
           >
             <span>Barcha afzalliklar va kafolatlar bilan tanishish</span>
             <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" />

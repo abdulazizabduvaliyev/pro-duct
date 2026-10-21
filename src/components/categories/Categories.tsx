@@ -31,14 +31,14 @@ export function Categories() {
   useReveal(root);
 
   return (
-    <section id="categories" ref={root} className="relative mx-auto max-w-[1440px] scroll-mt-24 px-5 py-24 md:px-10 md:py-36">
+    <section id="categories" ref={root} className="relative mx-auto max-w-[1440px] scroll-mt-24 px-4 py-16 sm:px-6 md:px-10 md:py-36">
       <SectionHeading
         eyebrow="Kategoriyalar"
         title="Kerakli qurilmani tez toping."
         description="Noutbukdan aksessuargacha — hammasi tartibli toifalarda."
       />
 
-      <ul className="mt-14 grid grid-cols-2 gap-3 md:mt-20 md:gap-5 lg:grid-cols-4">
+      <ul className="mt-10 grid grid-cols-2 gap-2.5 sm:grid-cols-2 sm:gap-3 md:mt-20 md:gap-5 lg:grid-cols-4">
         {categories.map((c, i) => {
           const count = products.filter((p) => p.category === c.slug).length;
           const wide = i === 0 || i === 7;
@@ -47,15 +47,15 @@ export function Categories() {
               <TransitionLink
                 href={`/catalog?category=${c.slug}`}
                 onPointerMove={onMove}
-                className="group surface spot relative flex h-full min-h-[240px] flex-col justify-between overflow-hidden rounded-[28px] p-5 transition-colors duration-500 hover:border-white/20 md:min-h-[300px] md:p-7"
+                className="group surface spot relative flex h-full min-h-[200px] flex-col justify-between overflow-hidden rounded-2xl p-4 transition-colors duration-500 hover:border-white/20 sm:min-h-[260px] sm:rounded-[28px] sm:p-6 md:min-h-[300px] md:p-7"
               >
                 <div className="flex items-start justify-between">
                   <div>
-                    <h3 className="text-xl font-semibold tracking-tight md:text-2xl">{c.name}</h3>
+                    <h3 className="text-base font-semibold tracking-tight sm:text-xl md:text-2xl">{c.name}</h3>
                     <p className="mt-1 hidden max-w-[16rem] text-sm text-smoke sm:block">{c.tagline}</p>
                   </div>
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-full border border-line text-smoke transition-all duration-500 group-hover:border-white group-hover:bg-white group-hover:text-black">
-                    <ArrowUpRight className="size-4 transition-transform duration-500 group-hover:rotate-12" />
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full border border-line text-smoke transition-all duration-500 group-hover:border-white group-hover:bg-white group-hover:text-black sm:size-9">
+                    <ArrowUpRight className="size-3.5 transition-transform duration-500 group-hover:rotate-12 sm:size-4" />
                   </span>
                 </div>
 

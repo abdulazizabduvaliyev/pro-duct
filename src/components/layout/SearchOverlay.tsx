@@ -58,37 +58,37 @@ export function SearchOverlay() {
     <div ref={root} inert={!searchOpen} className="fixed inset-0 z-[95] hidden" role="dialog" aria-modal="true" aria-label="Qidirish">
       <div ref={backdrop} onClick={close} className="absolute inset-0 bg-ink/85 opacity-0 backdrop-blur-2xl" />
 
-      <div ref={panel} tabIndex={-1} className="relative mx-auto flex max-h-full w-full max-w-3xl flex-col px-4 pt-[12vh] outline-none sm:px-6">
-        <div className="glass flex items-center gap-3 rounded-full px-5 py-1.5">
-          <Search className="size-5 shrink-0 text-smoke" strokeWidth={1.8} />
+      <div ref={panel} tabIndex={-1} className="relative mx-auto flex max-h-full w-full max-w-3xl flex-col px-4 pt-[6vh] outline-none sm:px-6 sm:pt-[10vh] md:pt-[12vh]">
+        <div className="glass flex items-center gap-2.5 rounded-full px-4 py-1 sm:gap-3 sm:px-5 sm:py-1.5">
+          <Search className="size-4.5 shrink-0 text-smoke sm:size-5" strokeWidth={1.8} />
           <input
             ref={input}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="MacBook, iPhone, monitor…"
             aria-label="Mahsulot qidirish"
-            className="h-12 w-full bg-transparent text-base text-fog outline-none placeholder:text-ash md:text-lg"
+            className="h-11 w-full bg-transparent text-sm text-fog outline-none placeholder:text-ash sm:h-12 sm:text-base md:text-lg"
           />
           <button
             type="button"
             onClick={close}
             aria-label="Yopish"
-            className="flex size-9 shrink-0 items-center justify-center rounded-full text-smoke transition-colors hover:bg-white/10 hover:text-white"
+            className="flex size-8 shrink-0 items-center justify-center rounded-full text-smoke transition-colors hover:bg-white/10 hover:text-white sm:size-9"
           >
-            <X className="size-5" />
+            <X className="size-4.5 sm:size-5" />
           </button>
         </div>
 
-        <div data-lenis-prevent className="mt-4 min-h-0 flex-1 overflow-y-auto pb-10">
+        <div data-lenis-prevent className="mt-3.5 min-h-0 flex-1 overflow-y-auto pb-8 sm:mt-4 sm:pb-10">
           {query.trim() === "" ? (
-            <div className="px-2 pt-4">
-              <p className="mb-3 text-xs font-medium uppercase tracking-[0.14em] text-ash">Kategoriyalar</p>
-              <div className="flex flex-wrap gap-2">
+            <div className="px-2 pt-3 sm:pt-4">
+              <p className="mb-2.5 text-xs font-medium uppercase tracking-[0.14em] text-ash sm:mb-3">Kategoriyalar</p>
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {categories.map((c) => (
                   <TransitionLink
                     key={c.slug}
                     href={`/catalog?category=${c.slug}`}
-                    className="rounded-full border border-line bg-white/4 px-4 py-2 text-sm text-fog/90 transition-colors hover:bg-white/10"
+                    className="rounded-full border border-line bg-white/4 px-3.5 py-1.5 text-xs text-fog/90 transition-colors hover:bg-white/10 sm:px-4 sm:py-2 sm:text-sm"
                   >
                     {c.name}
                   </TransitionLink>
@@ -96,33 +96,33 @@ export function SearchOverlay() {
               </div>
             </div>
           ) : results.length === 0 ? (
-            <p className="px-3 pt-8 text-center text-smoke">«{query}» bo&apos;yicha hech narsa topilmadi.</p>
+            <p className="px-3 pt-8 text-center text-xs text-smoke sm:text-sm">«{query}» bo&apos;yicha hech narsa topilmadi.</p>
           ) : (
-            <ul className="glass overflow-hidden rounded-3xl">
+            <ul className="glass overflow-hidden rounded-2xl sm:rounded-3xl">
               {results.map((p) => (
                 <li key={p.slug} className="border-b border-line last:border-b-0">
                   <TransitionLink
                     href={`/product/${p.slug}`}
-                    className="group flex items-center gap-4 px-4 py-3 transition-colors hover:bg-white/6"
+                    className="group flex items-center gap-3 px-3.5 py-2.5 transition-colors hover:bg-white/6 sm:gap-4 sm:px-4 sm:py-3"
                   >
-                    <div className="relative size-16 shrink-0">
+                    <div className="relative size-12 shrink-0 sm:size-16">
                       <ProductMedia product={p} sizes="64px" />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="truncate font-medium text-fog">{p.name}</p>
-                      <p className="truncate text-sm text-ash">
+                      <p className="truncate text-sm font-medium text-fog sm:text-base">{p.name}</p>
+                      <p className="truncate text-xs text-ash sm:text-sm">
                         {getBrand(p.brand)?.name} · {getCategory(p.category)?.name}
                       </p>
                     </div>
-                    <span className="hidden text-sm text-smoke sm:block">{formatPrice(p.price)}</span>
-                    <ArrowUpRight className="size-4 text-ash transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    <span className="hidden text-xs text-smoke sm:block sm:text-sm">{formatPrice(p.price)}</span>
+                    <ArrowUpRight className="size-3.5 text-ash transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 sm:size-4" />
                   </TransitionLink>
                 </li>
               ))}
               <li>
                 <TransitionLink
                   href={`/catalog?q=${encodeURIComponent(query.trim())}`}
-                  className="flex items-center justify-center px-4 py-4 text-sm text-smoke transition-colors hover:text-white"
+                  className="flex items-center justify-center px-4 py-3.5 text-xs text-smoke transition-colors hover:text-white sm:py-4 sm:text-sm"
                 >
                   Katalogda barcha natijalarni ko&apos;rish
                 </TransitionLink>

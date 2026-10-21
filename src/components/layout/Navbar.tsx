@@ -228,34 +228,46 @@ function MobileMenu() {
       aria-label="Menyu"
     >
       <div ref={backdrop} onClick={close} className="absolute inset-0 bg-ink/90 opacity-0 backdrop-blur-2xl" />
-      <div ref={panel} tabIndex={-1} className="relative flex h-full flex-col justify-between px-6 pb-10 pt-28 outline-none">
-        <ul className="flex flex-col gap-1">
+      <div
+        ref={panel}
+        tabIndex={-1}
+        className="no-scrollbar relative flex min-h-full flex-col justify-between overflow-y-auto px-6 pb-10 pt-24 outline-none sm:pt-28"
+      >
+        <ul className="flex flex-col gap-0.5">
           {site.nav.map((item) => (
             <li key={item.href} data-menu-item>
               <TransitionLink
                 href={item.href}
-                className="block py-3 text-4xl font-semibold tracking-[-0.03em] text-fog transition-colors hover:text-white sm:text-5xl"
+                onClick={close}
+                className="block py-2 text-2xl font-semibold tracking-[-0.03em] text-fog transition-colors hover:text-white sm:py-3 sm:text-4xl"
               >
                 {item.label}
               </TransitionLink>
             </li>
           ))}
           <li data-menu-item>
-            <TransitionLink href="/wishlist" className="block py-3 text-4xl font-semibold tracking-[-0.03em] text-fog sm:text-5xl">
+            <TransitionLink
+              href="/wishlist"
+              onClick={close}
+              className="block py-2 text-2xl font-semibold tracking-[-0.03em] text-fog transition-colors hover:text-white sm:py-3 sm:text-4xl"
+            >
               Tanlanganlar
             </TransitionLink>
           </li>
         </ul>
 
-        <div data-menu-item className="flex flex-col gap-3">
+        <div data-menu-item className="mt-8 flex flex-col gap-3">
           <button
             type="button"
-            onClick={() => openConsult()}
-            className="inline-flex h-14 items-center justify-center rounded-full bg-white text-base font-medium text-black"
+            onClick={() => {
+              close();
+              openConsult();
+            }}
+            className="inline-flex h-12 items-center justify-center rounded-full bg-white text-sm font-semibold text-black transition-transform active:scale-95 sm:h-14 sm:text-base"
           >
             Konsultatsiya olish
           </button>
-          <a href={site.contacts.phoneHref} className="text-center text-sm text-smoke">
+          <a href={site.contacts.phoneHref} className="text-center text-sm text-smoke transition-colors hover:text-white">
             {site.contacts.phone}
           </a>
         </div>

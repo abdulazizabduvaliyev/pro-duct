@@ -105,44 +105,44 @@ export function ConsultModal() {
           ref={panel}
           tabIndex={-1}
           data-lenis-prevent
-          className="surface relative max-h-full w-full max-w-lg overflow-y-auto rounded-t-[32px] p-7 outline-none sm:rounded-[32px] sm:p-9"
+          className="surface relative max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-t-[28px] p-5 pb-8 outline-none sm:rounded-[32px] sm:p-8 md:p-9"
         >
           <button
             type="button"
             onClick={close}
             aria-label="Yopish"
-            className="absolute right-4 top-4 flex size-10 items-center justify-center rounded-full text-smoke transition-colors hover:bg-white/10 hover:text-white"
+            className="absolute right-3.5 top-3.5 flex size-9 items-center justify-center rounded-full text-smoke transition-colors hover:bg-white/10 hover:text-white sm:right-4 sm:top-4 sm:size-10"
           >
             <X className="size-5" />
           </button>
 
           {status === "done" ? (
-            <div className="flex flex-col items-center gap-5 py-8 text-center">
-              <div ref={check} className="flex size-20 items-center justify-center rounded-full bg-white text-black">
-                <Check className="size-10" strokeWidth={2.4} />
+            <div className="flex flex-col items-center gap-4 py-6 text-center sm:gap-5 sm:py-8">
+              <div ref={check} className="flex size-16 items-center justify-center rounded-full bg-white text-black sm:size-20">
+                <Check className="size-8 sm:size-10" strokeWidth={2.4} />
               </div>
-              <h2 className="text-2xl font-semibold tracking-tight">Rahmat!</h2>
-              <p className="max-w-xs text-smoke">
+              <h2 className="text-xl font-semibold tracking-tight sm:text-2xl">Rahmat!</h2>
+              <p className="max-w-xs text-xs text-smoke sm:text-sm">
                 {isOrder ? "Buyurtmangiz qabul qilindi." : "So'rovingiz qabul qilindi."} Menejerimiz tez orada siz bilan bog&apos;lanadi.
               </p>
               <button
                 type="button"
                 onClick={close}
-                className="mt-2 inline-flex h-11 items-center rounded-full bg-white/10 px-6 text-sm font-medium transition-colors hover:bg-white/15"
+                className="mt-2 inline-flex h-10 items-center rounded-full bg-white/10 px-5 text-xs font-medium transition-colors hover:bg-white/15 sm:h-11 sm:px-6 sm:text-sm"
               >
                 Yopish
               </button>
             </div>
           ) : (
-            <form onSubmit={onSubmit} noValidate className="flex flex-col gap-4">
+            <form onSubmit={onSubmit} noValidate className="flex flex-col gap-3.5 sm:gap-4">
               <div className="pr-10">
                 <p className="text-xs font-medium uppercase tracking-[0.14em] text-ash">
                   {isOrder ? "Buyurtma" : "Konsultatsiya"}
                 </p>
-                <h2 className="mt-2 text-2xl font-semibold leading-tight tracking-[-0.02em] sm:text-3xl">
+                <h2 className="mt-1.5 text-xl font-semibold leading-tight tracking-[-0.02em] sm:mt-2 sm:text-2xl md:text-3xl">
                   {isOrder ? "Buyurtmani rasmiylashtiring" : "Mos qurilmani birga tanlaymiz"}
                 </h2>
-                <p className="mt-2 text-sm text-smoke">
+                <p className="mt-1.5 text-xs text-smoke sm:mt-2 sm:text-sm">
                   {isOrder
                     ? "Ma'lumotlaringizni qoldiring — menejer tasdiqlash va yetkazib berish uchun bog'lanadi."
                     : "Raqamingizni qoldiring — mutaxassisimiz qo'ng'iroq qilib, savollaringizga javob beradi."}
@@ -194,7 +194,7 @@ export function ConsultModal() {
               </label>
 
               {error ? (
-                <p role="alert" className="text-sm text-red-300">
+                <p role="alert" className="text-xs text-red-300 sm:text-sm">
                   {error}
                 </p>
               ) : null}
@@ -202,7 +202,7 @@ export function ConsultModal() {
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="mt-1 inline-flex h-13 items-center justify-center gap-2 rounded-full bg-white text-[15px] font-medium text-black transition-colors hover:bg-white/90 disabled:opacity-60"
+                className="mt-1 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white text-sm font-medium text-black transition-colors hover:bg-white/90 disabled:opacity-60 sm:h-13 sm:text-[15px]"
               >
                 {status === "sending" ? (
                   "Yuborilmoqda…"

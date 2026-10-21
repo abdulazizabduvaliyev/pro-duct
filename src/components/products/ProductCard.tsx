@@ -88,7 +88,7 @@ export function ProductCard({ product, priority, className }: Props) {
   return (
     <article
       ref={root}
-      className={cn("group/card surface spot relative flex h-full flex-col overflow-hidden rounded-[28px]", className)}
+      className={cn("group/card surface spot relative flex h-full flex-col overflow-hidden rounded-[22px] sm:rounded-[28px]", className)}
     >
       <div
         ref={glow}
@@ -98,15 +98,15 @@ export function ProductCard({ product, priority, className }: Props) {
 
       <TransitionLink href={`/product/${product.slug}`} aria-label={product.name} className="absolute inset-0 z-10 rounded-[inherit]" />
 
-      <div className="pointer-events-none absolute inset-x-4 top-4 z-20 flex items-start justify-between">
-        <div className="flex flex-wrap gap-1.5">
+      <div className="pointer-events-none absolute inset-x-3 top-3 z-20 flex items-start justify-between sm:inset-x-4 sm:top-4">
+        <div className="flex flex-wrap gap-1 sm:gap-1.5">
           {product.badge ? (
-            <span className="rounded-full bg-white px-2.5 py-1 text-[11px] font-semibold tracking-wide text-black">
+            <span className="rounded-full bg-white px-2 py-0.5 text-[10px] font-semibold tracking-wide text-black sm:px-2.5 sm:py-1 sm:text-[11px]">
               {product.badge}
             </span>
           ) : null}
           {product.stock === "low" ? (
-            <span className="rounded-full border border-line bg-black/40 px-2.5 py-1 text-[11px] font-medium text-smoke backdrop-blur-md">
+            <span className="rounded-full border border-line bg-black/40 px-2 py-0.5 text-[10px] font-medium text-smoke backdrop-blur-md sm:px-2.5 sm:py-1 sm:text-[11px]">
               {stockLabel.low}
             </span>
           ) : null}
@@ -116,17 +116,17 @@ export function ProductCard({ product, priority, className }: Props) {
         </div>
       </div>
 
-      <div className="relative aspect-[5/4] px-6 pt-12 [perspective:900px]">
+      <div className="relative aspect-[5/4] px-4 pt-10 sm:px-6 sm:pt-12 [perspective:900px]">
         <div ref={art} className="relative h-full w-full will-change-transform [transform-style:preserve-3d]">
           <ProductMedia product={product} priority={priority} />
         </div>
       </div>
 
-      <div className="relative flex flex-1 flex-col gap-3 px-6 pb-6 pt-4">
+      <div className="relative flex flex-1 flex-col gap-2 px-4 pb-4 pt-3 sm:gap-3 sm:px-6 sm:pb-6 sm:pt-4">
         <div>
-          <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-ash">{brand?.name}</p>
-          <h3 className="mt-1 text-lg font-semibold leading-snug tracking-tight text-fog">{product.name}</h3>
-          <p className="mt-1 line-clamp-1 text-sm text-smoke">{product.tagline}</p>
+          <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-ash sm:text-[11px]">{brand?.name}</p>
+          <h3 className="mt-1 text-base font-semibold leading-snug tracking-tight text-fog sm:text-lg">{product.name}</h3>
+          <p className="mt-0.5 line-clamp-1 text-xs text-smoke sm:mt-1 sm:text-sm">{product.tagline}</p>
         </div>
 
         <div className="mt-auto flex items-end justify-between gap-3">

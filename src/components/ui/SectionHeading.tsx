@@ -78,12 +78,12 @@ export function SectionHeading({ eyebrow, title, description, align = "left", ac
         <SplitWords
           as="h2"
           text={title}
-          className="block text-[clamp(2rem,5vw,3.75rem)] font-semibold leading-[1.05] tracking-[-0.035em] text-fog"
+          className="block text-[clamp(1.75rem,5.5vw,3.75rem)] font-semibold leading-[1.08] tracking-[-0.035em] text-fog"
         />
         {description ? (
           <p
             data-sh
-            className="mt-5 max-w-xl text-base leading-relaxed text-smoke md:text-lg"
+            className="mt-3.5 max-w-xl text-sm leading-relaxed text-smoke sm:mt-5 sm:text-base md:text-lg"
           >
             {description}
           </p>

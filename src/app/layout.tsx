@@ -42,6 +42,9 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: "#0a0a0c",
   colorScheme: "dark",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 const jsonLd = {
@@ -86,7 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </noscript>
       </head>
       {/* Browser extensions add attributes to <body> before React hydrates. */}
-      <body className="min-h-full bg-graphite font-sans text-fog" suppressHydrationWarning>
+      <body className="min-h-full w-full overflow-x-hidden bg-graphite font-sans text-fog" suppressHydrationWarning>
         <a
           href="#main"
           className="sr-only z-[300] rounded-full bg-white px-4 py-2 text-sm font-medium text-black focus:not-sr-only focus:fixed focus:left-4 focus:top-4"

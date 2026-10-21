@@ -113,29 +113,29 @@ export function Hero() {
         <SplitWords
           as="h1"
           text="Texnologiya. Premium darajada."
-          className="mt-7 block text-[clamp(2.9rem,9vw,7.5rem)] font-semibold leading-[1.06] tracking-[-0.055em]"
+          className="mt-6 block text-[clamp(2.15rem,7.5vw,7rem)] font-semibold leading-[1.08] tracking-[-0.04em] sm:mt-7"
           wordClassName="text-fade"
         />
 
-        <p data-hero="fade" className="mt-7 max-w-xl text-base leading-relaxed text-smoke md:text-xl">
+        <p data-hero="fade" className="mt-5 max-w-xl text-sm leading-relaxed text-smoke sm:mt-7 sm:text-base md:text-xl">
           MacBook, iPhone, iPad va boshqa premium qurilmalar — ishonchli kafolat va tezkor yetkazib berish bilan.
         </p>
 
-        <div data-hero="fade" className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
-          <Button href="/catalog" size="lg" magnetic icon={<ArrowRight className="size-4" />}>
+        <div data-hero="fade" className="mt-8 flex w-full max-w-xs flex-col items-stretch gap-2.5 sm:w-auto sm:max-w-none sm:flex-row sm:items-center">
+          <Button href="/catalog" size="lg" magnetic icon={<ArrowRight className="size-4" />} className="w-full sm:w-auto">
             Katalogni ko&apos;rish
           </Button>
-          <Button href="/custom-pc" variant="secondary" size="lg" magnetic icon={<Wrench className="size-4" />}>
+          <Button href="/custom-pc" variant="secondary" size="lg" magnetic icon={<Wrench className="size-4" />} className="w-full sm:w-auto">
             PC Konfigurator
           </Button>
-          <OpenConsult variant="ghost" size="lg" magnetic>
+          <OpenConsult variant="ghost" size="lg" magnetic className="w-full sm:w-auto">
             Konsultatsiya
           </OpenConsult>
         </div>
       </div>
 
       {/* product layer */}
-      <div data-layer="product" className="relative z-0 mx-auto mt-12 w-[min(1000px,128vw)] md:-mt-2">
+      <div data-layer="product" className="relative z-0 mx-auto mt-10 w-full max-w-[1000px] px-2 sm:px-0 md:-mt-2">
         <div data-hero="product" className="relative aspect-[4/3] w-full">
           <Macbook3D mode="hero" interactive priority />
         </div>

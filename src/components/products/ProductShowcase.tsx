@@ -160,10 +160,10 @@ export function ProductShowcase() {
       <div
         data-sc="glow"
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 aspect-square w-[min(1100px,140vw)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(255_255_255/0.13),rgb(255_255_255/0.03)_55%,transparent)]"
+        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 aspect-square w-[min(1100px,100vw)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(255_255_255/0.13),rgb(255_255_255/0.03)_55%,transparent)]"
       />
 
-      <div className="sc-stage relative mx-auto flex max-w-[1440px] flex-col items-center px-5 md:px-10">
+      <div className="sc-stage relative mx-auto flex max-w-[1440px] flex-col items-center px-4 sm:px-6 md:px-10">
         <div data-sc="intro" className="sc-intro text-center">
           <span className="glass inline-flex rounded-full px-4 py-1.5 text-xs font-medium tracking-wide text-smoke">
             Product showcase
@@ -171,10 +171,10 @@ export function ProductShowcase() {
           <SplitWords
             as="h2"
             text={product.name}
-            className="mt-6 block text-[clamp(2.4rem,7vw,6rem)] font-semibold leading-[1.06] tracking-[-0.045em]"
+            className="mt-6 block text-[clamp(2rem,6.5vw,5.5rem)] font-semibold leading-[1.08] tracking-[-0.04em]"
             wordClassName="text-fade"
           />
-          <p className="mx-auto mt-5 max-w-md text-base text-smoke md:text-lg">{product.tagline}</p>
+          <p className="mx-auto mt-4 max-w-md text-sm text-smoke sm:mt-5 sm:text-base md:text-lg">{product.tagline}</p>
         </div>
 
         <div className="sc-product relative mx-auto mt-12 w-[min(900px,100%)]">
@@ -210,13 +210,13 @@ export function ProductShowcase() {
         ))}
       </ul>
 
-      <div data-sc="cta" className="sc-cta mx-auto mt-12 flex flex-col items-center gap-5 px-5 text-center">
+      <div data-sc="cta" className="sc-cta mx-auto mt-12 flex flex-col items-center gap-5 px-4 text-center sm:px-6">
         <Price price={product.price} oldPrice={product.oldPrice} size="lg" className="justify-center" />
-        <div className="flex flex-col items-center gap-3 sm:flex-row">
-          <Button href={`/product/${product.slug}`} size="lg" magnetic icon={<ArrowRight className="size-4" />}>
+        <div className="flex w-full max-w-xs flex-col items-stretch gap-2.5 sm:w-auto sm:max-w-none sm:flex-row sm:items-center">
+          <Button href={`/product/${product.slug}`} size="lg" magnetic icon={<ArrowRight className="size-4" />} className="w-full sm:w-auto">
             Batafsil ko&apos;rish
           </Button>
-          <OpenConsult variant="secondary" size="lg" subject={product.name}>
+          <OpenConsult variant="secondary" size="lg" subject={product.name} className="w-full sm:w-auto">
             Konsultatsiya
           </OpenConsult>
         </div>

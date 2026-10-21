@@ -37,47 +37,47 @@ export function CartDrawer() {
         tabIndex={-1}
         className="absolute inset-y-0 right-0 flex w-full max-w-[460px] flex-col border-l border-white/10 bg-panel outline-none"
       >
-        <header className="flex items-center justify-between border-b border-line px-6 py-5">
+        <header className="flex items-center justify-between border-b border-line px-5 py-4 sm:px-6 sm:py-5">
           <div>
-            <h2 className="text-lg font-semibold tracking-tight">Savat</h2>
-            <p className="text-sm text-ash">{count > 0 ? `${count} ta mahsulot` : "Hozircha bo'sh"}</p>
+            <h2 className="text-base font-semibold tracking-tight sm:text-lg">Savat</h2>
+            <p className="text-xs text-ash sm:text-sm">{count > 0 ? `${count} ta mahsulot` : "Hozircha bo'sh"}</p>
           </div>
           <button
             type="button"
             onClick={close}
             aria-label="Savatni yopish"
-            className="flex size-10 items-center justify-center rounded-full text-smoke transition-colors hover:bg-white/10 hover:text-white"
+            className="flex size-9 items-center justify-center rounded-full text-smoke transition-colors hover:bg-white/10 hover:text-white sm:size-10"
           >
             <X className="size-5" />
           </button>
         </header>
 
         {lines.length === 0 ? (
-          <div className="flex flex-1 flex-col items-center justify-center gap-5 px-8 text-center">
-            <div className="flex size-16 items-center justify-center rounded-full border border-line bg-white/5">
-              <ShoppingBag className="size-7 text-smoke" strokeWidth={1.5} />
+          <div className="flex flex-1 flex-col items-center justify-center gap-4 px-6 text-center sm:gap-5 sm:px-8">
+            <div className="flex size-14 items-center justify-center rounded-full border border-line bg-white/5 sm:size-16">
+              <ShoppingBag className="size-6 text-smoke sm:size-7" strokeWidth={1.5} />
             </div>
             <div>
-              <p className="text-lg font-medium">Savat bo&apos;sh</p>
-              <p className="mt-1 text-sm text-smoke">Katalogdan o&apos;zingizga mos qurilmani tanlang.</p>
+              <p className="text-base font-medium sm:text-lg">Savat bo&apos;sh</p>
+              <p className="mt-1 text-xs text-smoke sm:text-sm">Katalogdan o&apos;zingizga mos qurilmani tanlang.</p>
             </div>
             <TransitionLink
               href="/catalog"
-              className="inline-flex h-11 items-center rounded-full bg-white px-6 text-sm font-medium text-black"
+              className="inline-flex h-10 items-center rounded-full bg-white px-5 text-xs font-medium text-black sm:h-11 sm:px-6 sm:text-sm"
             >
               Katalogga o&apos;tish
             </TransitionLink>
           </div>
         ) : (
           <>
-            <ul data-lenis-prevent className="flex-1 divide-y divide-line overflow-y-auto px-6">
+            <ul data-lenis-prevent className="flex-1 divide-y divide-line overflow-y-auto px-4 sm:px-6">
               {lines.map((line) => {
                 const swatch = line.product.colors.find((c) => c.name === line.color)?.value;
                 return (
-                  <li key={line.key} className="flex gap-4 py-5">
+                  <li key={line.key} className="flex gap-3 py-4 sm:gap-4 sm:py-5">
                     <TransitionLink
                       href={`/product/${line.product.slug}`}
-                      className="surface relative block size-24 shrink-0 overflow-hidden rounded-2xl p-2"
+                      className="surface relative block size-20 shrink-0 overflow-hidden rounded-xl p-1.5 sm:size-24 sm:rounded-2xl sm:p-2"
                     >
                       <div className="relative size-full">
                         <ProductMedia product={line.product} tone={swatch} sizes="96px" />
@@ -85,11 +85,11 @@ export function CartDrawer() {
                     </TransitionLink>
 
                     <div className="flex min-w-0 flex-1 flex-col">
-                      <div className="flex items-start justify-between gap-3">
+                      <div className="flex items-start justify-between gap-2 sm:gap-3">
                         <div className="min-w-0">
                           <TransitionLink
                             href={`/product/${line.product.slug}`}
-                            className="block truncate text-[15px] font-medium text-fog hover:text-white"
+                            className="block truncate text-sm font-medium text-fog hover:text-white sm:text-[15px]"
                           >
                             {line.product.name}
                           </TransitionLink>
@@ -105,27 +105,27 @@ export function CartDrawer() {
                         </button>
                       </div>
 
-                      <div className="mt-auto flex items-center justify-between pt-3">
+                      <div className="mt-auto flex items-center justify-between pt-2 sm:pt-3">
                         <div className="flex items-center rounded-full border border-line">
                           <button
                             type="button"
                             onClick={() => store.setQty(line.key, line.qty - 1)}
                             aria-label="Kamaytirish"
-                            className="flex size-8 items-center justify-center text-smoke hover:text-white"
+                            className="flex size-7 items-center justify-center text-smoke hover:text-white sm:size-8"
                           >
-                            <Minus className="size-3.5" />
+                            <Minus className="size-3" />
                           </button>
-                          <span className="min-w-6 text-center text-sm tabular-nums">{line.qty}</span>
+                          <span className="min-w-5 text-center text-xs tabular-nums sm:min-w-6 sm:text-sm">{line.qty}</span>
                           <button
                             type="button"
                             onClick={() => store.setQty(line.key, line.qty + 1)}
                             aria-label="Ko'paytirish"
-                            className="flex size-8 items-center justify-center text-smoke hover:text-white"
+                            className="flex size-7 items-center justify-center text-smoke hover:text-white sm:size-8"
                           >
-                            <Plus className="size-3.5" />
+                            <Plus className="size-3" />
                           </button>
                         </div>
-                        <span className="text-[15px] font-semibold tabular-nums">
+                        <span className="text-sm font-semibold tabular-nums sm:text-[15px]">
                           {formatPrice(line.product.price * line.qty)}
                         </span>
                       </div>
@@ -135,12 +135,12 @@ export function CartDrawer() {
               })}
             </ul>
 
-            <footer className="border-t border-line bg-panel px-6 pb-6 pt-5">
+            <footer className="border-t border-line bg-panel px-4 pb-6 pt-4 sm:px-6 sm:pb-6 sm:pt-5">
               <div className="flex items-baseline justify-between">
-                <span className="text-sm text-smoke">Jami</span>
-                <span className="text-2xl font-semibold tracking-tight tabular-nums">{formatPrice(total)}</span>
+                <span className="text-xs text-smoke sm:text-sm">Jami</span>
+                <span className="text-xl font-semibold tracking-tight tabular-nums sm:text-2xl">{formatPrice(total)}</span>
               </div>
-              <p className="mt-1 text-xs text-ash">Yetkazib berish va to&apos;lov shartlari buyurtma vaqtida kelishiladi.</p>
+              <p className="mt-1 text-[11px] text-ash sm:text-xs">Yetkazib berish va to&apos;lov shartlari buyurtma vaqtida kelishiladi.</p>
               <button
                 type="button"
                 onClick={() =>
@@ -149,14 +149,14 @@ export function CartDrawer() {
                     subject: lines.map((l) => `${l.product.name} × ${l.qty}`).join(", "),
                   })
                 }
-                className="mt-4 inline-flex h-12 w-full items-center justify-center rounded-full bg-white text-sm font-medium text-black transition-colors hover:bg-white/90"
+                className="mt-3.5 inline-flex h-11 w-full items-center justify-center rounded-full bg-white text-sm font-medium text-black transition-colors hover:bg-white/90 sm:mt-4 sm:h-12"
               >
                 Buyurtma berish
               </button>
               <button
                 type="button"
                 onClick={() => store.clearCart()}
-                className="mt-2 w-full py-2 text-xs text-ash transition-colors hover:text-fog"
+                className="mt-2 w-full py-1.5 text-xs text-ash transition-colors hover:text-fog sm:py-2"
               >
                 Savatni tozalash
               </button>
