@@ -19,7 +19,7 @@ type RevealOptions = {
  * Elements are hidden up-front by the `.anim [data-reveal]` rule in globals.css.
  */
 export function useReveal(scope: RefObject<HTMLElement | null>, options: RevealOptions = {}) {
-  const { selector = "[data-reveal]", y = 80, start = "top 88%", stagger = STAGGER.base } = options;
+  const { selector = "[data-reveal]", y = 80, start = "top 90%", stagger = STAGGER.base } = options;
 
   useGSAP(
     () => {
@@ -35,9 +35,24 @@ export function useReveal(scope: RefObject<HTMLElement | null>, options: RevealO
           return;
         }
 
-        gsap.set(els, { y: y * k });
+        const winH = typeof window !== "undefined" ? window.innerHeight : 800;
+        const pending: HTMLElement[] = [];
 
-        ScrollTrigger.batch(els, {
+        // Check if elements are already in/near viewport to reveal immediately
+        els.forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < winH * 0.92) {
+            gsap.set(el, { opacity: 1, y: 0 });
+          } else {
+            gsap.set(el, { y: y * k, opacity: 0 });
+            pending.push(el);
+          }
+        });
+
+        if (!pending.length) return;
+
+        // Use ScrollTrigger.batch for below-the-fold elements
+        ScrollTrigger.batch(pending, {
           start,
           once: true,
           onEnter: (batch) =>
@@ -49,7 +64,44 @@ export function useReveal(scope: RefObject<HTMLElement | null>, options: RevealO
               stagger,
               overwrite: true,
             }),
+          onEnterBack: (batch) =>
+            gsap.to(batch, {
+              opacity: 1,
+              y: 0,
+              duration: DUR.slow,
+              ease: EASE.out,
+              stagger,
+              overwrite: true,
+            }),
         });
+
+        // Fail-safe native IntersectionObserver: ensures elements ALWAYS reveal on mobile momentum scroll
+        let io: IntersectionObserver | null = null;
+        if (typeof IntersectionObserver !== "undefined") {
+          io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  gsap.to(entry.target, {
+                    opacity: 1,
+                    y: 0,
+                    duration: DUR.slow,
+                    ease: EASE.out,
+                    overwrite: "auto",
+                  });
+                  io?.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.05, rootMargin: "0px 0px 80px 0px" },
+          );
+
+          pending.forEach((el) => io?.observe(el));
+        }
+
+        return () => {
+          io?.disconnect();
+        };
       });
     },
     { scope },
