@@ -57,7 +57,7 @@ export function Benefits() {
                 i < 2 ? "lg:col-span-3" : "lg:col-span-2"
               }`}
             >
-              <span className="flex size-10 items-center justify-center rounded-xl border border-line bg-white/5 text-fog transition-all duration-500 group-hover:scale-110 group-hover:border-white/25 group-hover:bg-white group-hover:text-black sm:size-12 sm:rounded-2xl">
+              <span className="flex size-10 items-center justify-center rounded-xl border border-line bg-fog/5 text-fog transition-all duration-500 group-hover:scale-110 group-hover:border-line-strong group-hover:bg-fog group-hover:text-ink sm:size-12 sm:rounded-2xl">
                 <b.icon className="size-4.5 sm:size-5" strokeWidth={1.7} />
               </span>
               <h3 className="mt-5 text-lg font-semibold tracking-tight sm:mt-8 sm:text-xl">{b.title}</h3>
@@ -69,7 +69,7 @@ export function Benefits() {
         <div className="mt-8 flex justify-center sm:mt-12">
           <TransitionLink
             href="/benefits"
-            className="group inline-flex items-center justify-center gap-2 rounded-full border border-line bg-white/5 px-5 py-2.5 text-center text-xs font-medium text-fog transition-all hover:border-white/20 hover:bg-white/10 hover:text-white sm:px-6 sm:py-3"
+            className="group inline-flex items-center justify-center gap-2 rounded-full border border-line bg-panel-2 px-5 py-2.5 text-center text-xs font-medium text-fog transition-all hover:border-line-strong hover:bg-fog/10 hover:text-fog sm:px-6 sm:py-3"
           >
             <span>Barcha afzalliklar va kafolatlar bilan tanishish</span>
             <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" />

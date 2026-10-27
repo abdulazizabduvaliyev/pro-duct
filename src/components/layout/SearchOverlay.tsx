@@ -7,6 +7,7 @@ import { getBrand } from "@/data/brands";
 import { products } from "@/data/products";
 import { formatPrice } from "@/lib/utils";
 import { useUI } from "@/lib/ui-state";
+import { useI18n } from "@/lib/i18n";
 import { useOverlay } from "@/components/animations/useOverlay";
 import { ProductMedia } from "@/components/products/ProductMedia";
 import { TransitionLink } from "./TransitionLink";
@@ -27,6 +28,7 @@ function matches(q: string) {
 /** Full-screen search. Open with the nav icon, "/" or ⌘/Ctrl + K. */
 export function SearchOverlay() {
   const { searchOpen, setSearchOpen } = useUI();
+  const { t } = useI18n();
   const [query, setQuery] = useState("");
   const results = useMemo(() => matches(query), [query]);
 
@@ -65,15 +67,15 @@ export function SearchOverlay() {
             ref={input}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="MacBook, iPhone, monitor…"
-            aria-label="Mahsulot qidirish"
+            placeholder={t("search.placeholder")}
+            aria-label={t("nav.search")}
             className="h-11 w-full bg-transparent text-sm text-fog outline-none placeholder:text-ash sm:h-12 sm:text-base md:text-lg"
           />
           <button
             type="button"
             onClick={close}
             aria-label="Yopish"
-            className="flex size-8 shrink-0 items-center justify-center rounded-full text-smoke transition-colors hover:bg-white/10 hover:text-white sm:size-9"
+            className="flex size-8 shrink-0 items-center justify-center rounded-full text-smoke transition-colors hover:bg-fog/10 hover:text-fog sm:size-9"
           >
             <X className="size-4.5 sm:size-5" />
           </button>
@@ -82,7 +84,9 @@ export function SearchOverlay() {
         <div data-lenis-prevent className="mt-3.5 min-h-0 flex-1 overflow-y-auto pb-8 sm:mt-4 sm:pb-10">
           {query.trim() === "" ? (
             <div className="px-2 pt-3 sm:pt-4">
-              <p className="mb-2.5 text-xs font-medium uppercase tracking-[0.14em] text-ash sm:mb-3">Kategoriyalar</p>
+              <p className="mb-2.5 text-xs font-medium uppercase tracking-[0.14em] text-ash sm:mb-3">
+                {t("nav.catalog")}
+              </p>
               <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {categories.map((c) => (
                   <TransitionLink
@@ -96,7 +100,9 @@ export function SearchOverlay() {
               </div>
             </div>
           ) : results.length === 0 ? (
-            <p className="px-3 pt-8 text-center text-xs text-smoke sm:text-sm">«{query}» bo&apos;yicha hech narsa topilmadi.</p>
+            <p className="px-3 pt-8 text-center text-xs text-smoke sm:text-sm">
+              «{query}» — {t("search.noResults")}.
+            </p>
           ) : (
             <ul className="glass overflow-hidden rounded-2xl sm:rounded-3xl">
               {results.map((p) => (
@@ -122,7 +128,7 @@ export function SearchOverlay() {
               <li>
                 <TransitionLink
                   href={`/catalog?q=${encodeURIComponent(query.trim())}`}
-                  className="flex items-center justify-center px-4 py-3.5 text-xs text-smoke transition-colors hover:text-white sm:py-4 sm:text-sm"
+                  className="flex items-center justify-center px-4 py-3.5 text-xs text-smoke transition-colors hover:text-fog sm:py-4 sm:text-sm"
                 >
                   Katalogda barcha natijalarni ko&apos;rish
                 </TransitionLink>

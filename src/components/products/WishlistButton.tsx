@@ -41,7 +41,7 @@ export function WishlistButton({ slug, name, className, size = "md" }: Props) {
     >
       <Heart
         ref={icon}
-        className={cn("size-[18px] transition-colors", active ? "fill-white text-white" : "text-fog/80")}
+        className={cn("size-[18px] transition-colors", active ? "fill-rose-500 text-rose-500" : "text-fog/80")}
         strokeWidth={1.8}
       />
     </button>

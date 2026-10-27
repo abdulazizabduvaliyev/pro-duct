@@ -27,9 +27,9 @@ const base =
   "group/btn relative inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-full font-medium tracking-tight transition-[background-color,color,border-color,box-shadow,transform] duration-300 ease-apple disabled:pointer-events-none disabled:opacity-40";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-white text-black shadow-[0_8px_30px_-8px_rgb(255_255_255/0.35)] hover:bg-white/90",
-  secondary: "glass text-fog hover:bg-white/12 hover:border-white/20",
-  ghost: "text-fog/80 hover:text-white",
+  primary: "bg-fog text-ink shadow-[0_8px_30px_-8px_rgb(0_0_0/0.12)] dark:shadow-[0_8px_30px_-8px_rgb(255_255_255/0.35)] hover:opacity-90",
+  secondary: "glass text-fog hover:bg-fog/10 hover:border-line-strong",
+  ghost: "text-fog/80 hover:text-fog",
 };
 
 const sizes: Record<Size, string> = {

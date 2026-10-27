@@ -88,11 +88,11 @@ export function ProductDetail({ product }: { product: Product }) {
     <>
       <div ref={root} className="mx-auto max-w-[1440px] px-4 pb-8 pt-20 sm:px-6 sm:pt-24 md:px-10 md:pt-28">
         <nav data-hero="crumb" aria-label="Yo'l" className="mb-6 flex flex-wrap items-center gap-1.5 text-xs text-ash sm:mb-8 sm:text-[13px]">
-          <TransitionLink href="/catalog" className="transition-colors hover:text-white">
+          <TransitionLink href="/catalog" className="transition-colors hover:text-fog">
             Katalog
           </TransitionLink>
           <ChevronRight className="size-3.5" />
-          <TransitionLink href={`/catalog?category=${product.category}`} className="transition-colors hover:text-white">
+          <TransitionLink href={`/catalog?category=${product.category}`} className="transition-colors hover:text-fog">
             {category?.name}
           </TransitionLink>
           <ChevronRight className="size-3.5" />
@@ -107,11 +107,11 @@ export function ProductDetail({ product }: { product: Product }) {
           <div className="flex flex-col gap-6 sm:gap-7 lg:col-span-5">
             <div data-hero="info">
               <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.14em] text-ash">
-                <TransitionLink href={`/catalog?brand=${product.brand}`} className="transition-colors hover:text-white">
+                <TransitionLink href={`/catalog?brand=${product.brand}`} className="transition-colors hover:text-fog">
                   {brand?.name}
                 </TransitionLink>
                 {product.badge ? (
-                  <span className="rounded-full bg-white px-2.5 py-1 text-[11px] font-semibold tracking-wide text-black">
+                  <span className="rounded-full bg-fog px-2.5 py-1 text-[11px] font-semibold tracking-wide text-ink">
                     {product.badge}
                   </span>
                 ) : null}
@@ -162,12 +162,12 @@ export function ProductDetail({ product }: { product: Product }) {
 
             <div data-hero="info" className="flex flex-col gap-3">
               <div className="flex items-center gap-2 sm:gap-3">
-                <div className="flex h-12 items-center rounded-full border border-line bg-white/4 sm:h-14">
+                <div className="flex h-12 items-center rounded-full border border-line bg-panel sm:h-14">
                   <button
                     type="button"
                     onClick={() => setQty((n) => Math.max(1, n - 1))}
                     aria-label="Kamaytirish"
-                    className="flex size-10 items-center justify-center text-smoke transition-colors hover:text-white sm:size-12"
+                    className="flex size-10 items-center justify-center text-smoke transition-colors hover:text-fog sm:size-12"
                   >
                     <Minus className="size-3.5 sm:size-4" />
                   </button>
@@ -176,7 +176,7 @@ export function ProductDetail({ product }: { product: Product }) {
                     type="button"
                     onClick={() => setQty((n) => Math.min(20, n + 1))}
                     aria-label="Ko'paytirish"
-                    className="flex size-10 items-center justify-center text-smoke transition-colors hover:text-white sm:size-12"
+                    className="flex size-10 items-center justify-center text-smoke transition-colors hover:text-fog sm:size-12"
                   >
                     <Plus className="size-3.5 sm:size-4" />
                   </button>

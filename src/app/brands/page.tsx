@@ -145,7 +145,7 @@ export default function BrandsPage() {
     <div className="mx-auto max-w-[1440px] px-4 pb-24 pt-20 sm:px-6 sm:pt-24 md:px-10 md:pb-28 md:pt-28">
       {/* ── Breadcrumb ── */}
       <nav aria-label="Yo'l" className="mb-6 flex items-center gap-1.5 text-xs text-ash">
-        <TransitionLink href="/" className="transition-colors hover:text-white">
+        <TransitionLink href="/" className="transition-colors hover:text-fog">
           Bosh sahifa
         </TransitionLink>
         <ChevronRight className="size-3.5" />
@@ -155,7 +155,7 @@ export default function BrandsPage() {
       {/* ── Page Header ── */}
       <div className="mb-10 flex flex-col items-start gap-3 sm:gap-4 md:mb-16">
         <span className="glass inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium tracking-wide text-smoke sm:px-4">
-          <Award className="size-3.5 text-white" />
+          <Award className="size-3.5 text-fog" />
           Rasmiy Hamkorlar & Ishlab Chiqaruvchilar
         </span>
 
@@ -171,31 +171,31 @@ export default function BrandsPage() {
       {/* ── Quality Guarantees Bar ── */}
       <div className="mb-14 grid grid-cols-1 gap-2.5 sm:grid-cols-3 sm:gap-3 md:mb-16">
         <div className="flex items-center gap-3 rounded-xl border border-line bg-panel/60 p-3.5 sm:rounded-2xl sm:p-4">
-          <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-white/5 text-white sm:size-10 sm:rounded-xl">
+          <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-fog/5 text-fog sm:size-10 sm:rounded-xl">
             <CheckCircle2 className="size-4.5 sm:size-5" />
           </span>
           <div>
-            <h4 className="text-xs font-semibold text-white">100% Original Zavod Sifati</h4>
+            <h4 className="text-xs font-semibold text-fog">100% Original Zavod Sifati</h4>
             <p className="text-[10px] text-smoke sm:text-[11px]">Hech qanday nusxa yoki ochilgan mahsulot yo&apos;q</p>
           </div>
         </div>
 
         <div className="flex items-center gap-3 rounded-xl border border-line bg-panel/60 p-3.5 sm:rounded-2xl sm:p-4">
-          <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-white/5 text-white sm:size-10 sm:rounded-xl">
+          <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-fog/5 text-fog sm:size-10 sm:rounded-xl">
             <ShieldCheck className="size-4.5 sm:size-5" />
           </span>
           <div>
-            <h4 className="text-xs font-semibold text-white">Rasmiy Servis Kafolati</h4>
+            <h4 className="text-xs font-semibold text-fog">Rasmiy Servis Kafolati</h4>
             <p className="text-[10px] text-smoke sm:text-[11px]">Ishlab chiqaruvchi xalqaro standartlari asosida</p>
           </div>
         </div>
 
         <div className="flex items-center gap-3 rounded-xl border border-line bg-panel/60 p-3.5 sm:rounded-2xl sm:p-4">
-          <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-white/5 text-white sm:size-10 sm:rounded-xl">
+          <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-fog/5 text-fog sm:size-10 sm:rounded-xl">
             <Globe2 className="size-4.5 sm:size-5" />
           </span>
           <div>
-            <h4 className="text-xs font-semibold text-white">To&apos;g&apos;ridan-To&apos;g&apos;ri Yetkazib Berish</h4>
+            <h4 className="text-xs font-semibold text-fog">To&apos;g&apos;ridan-To&apos;g&apos;ri Yetkazib Berish</h4>
             <p className="text-[10px] text-smoke sm:text-[11px]">AQSh, Yevropa va Osiyo rasmiy distribyutorlaridan</p>
           </div>
         </div>
@@ -208,7 +208,7 @@ export default function BrandsPage() {
             <span className="text-[11px] font-medium uppercase tracking-wider text-ash">
               Katalogdagi Brendlar
             </span>
-            <h2 className="mt-1 text-2xl font-bold tracking-tight text-white sm:text-3xl">
+            <h2 className="mt-1 text-2xl font-bold tracking-tight text-fog sm:text-3xl">
               Barcha Ishonchli Hamkorlarimiz
             </h2>
           </div>
@@ -227,20 +227,20 @@ export default function BrandsPage() {
               <div>
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3 sm:gap-3.5">
-                    <div className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-line bg-white/5 text-fog transition-all duration-300 group-hover:scale-105 group-hover:border-white/30 group-hover:bg-white group-hover:text-black sm:size-12 sm:rounded-2xl">
+                    <div className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-line bg-white/5 text-fog transition-all duration-300 group-hover:scale-105 group-hover:border-line-strong group-hover:bg-fog group-hover:text-ink sm:size-12 sm:rounded-2xl">
                       <BrandLogo brand={brand.slug} className="size-5 transition-transform duration-300 group-hover:scale-105 sm:size-6" />
                     </div>
                     <div>
                       <span className="text-[10px] font-medium uppercase tracking-wider text-ash">
                         {brand.category}
                       </span>
-                      <h3 className="mt-0.5 text-lg font-bold tracking-tight text-white transition-colors group-hover:text-fog sm:text-xl md:text-2xl">
+                      <h3 className="mt-0.5 text-lg font-bold tracking-tight text-fog transition-colors sm:text-xl md:text-2xl">
                         {brand.name}
                       </h3>
                     </div>
                   </div>
 
-                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full border border-line bg-white/5 text-smoke transition-all duration-300 group-hover:scale-110 group-hover:border-white group-hover:bg-white group-hover:text-black sm:size-9">
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full border border-line bg-white/5 text-smoke transition-all duration-300 group-hover:scale-110 group-hover:border-line-strong group-hover:bg-fog group-hover:text-ink sm:size-9">
                     <ArrowUpRight className="size-3.5 sm:size-4" />
                   </span>
                 </div>
@@ -256,13 +256,13 @@ export default function BrandsPage() {
 
               <div className="mt-5 flex items-center justify-between border-t border-line/60 pt-3.5 text-xs sm:mt-6 sm:pt-4">
                 {brand.badge ? (
-                  <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 font-mono text-[10px] text-smoke">
+                  <span className="rounded-full border border-line bg-panel-2 px-2.5 py-0.5 font-mono text-[10px] text-smoke">
                     {brand.badge}
                   </span>
                 ) : (
                   <span className="text-[11px] text-ash">Original Partiya</span>
                 )}
-                <span className="flex items-center gap-1 font-medium text-fog group-hover:text-white">
+                <span className="flex items-center gap-1 font-medium text-fog group-hover:text-fog">
                   <span>Mahsulotlar</span>
                   <ArrowRight className="size-3 transition-transform duration-300 group-hover:translate-x-1" />
                 </span>
@@ -273,14 +273,14 @@ export default function BrandsPage() {
       </div>
 
       {/* ── Bottom Call To Action ── */}
-      <div className="relative overflow-hidden rounded-2xl border border-line bg-gradient-to-b from-[#141418] to-ink p-6 text-center sm:rounded-3xl sm:p-14">
+      <div className="relative overflow-hidden rounded-2xl border border-line bg-gradient-to-b from-panel to-ink p-6 text-center sm:rounded-3xl sm:p-14">
         <div className="relative z-10 mx-auto max-w-xl">
           <span className="glass inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium tracking-wide text-smoke sm:px-4">
-            <Sparkles className="size-3.5 text-white" />
+            <Sparkles className="size-3.5 text-fog" />
             Maxsus Buyurtma & Eksklyuziv
           </span>
 
-          <h2 className="mt-4 text-xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
+          <h2 className="mt-4 text-xl font-bold tracking-tight text-fog sm:text-3xl md:text-4xl">
             Sizga kerakli modelni topa olmadingizmi?
           </h2>
 
@@ -289,14 +289,14 @@ export default function BrandsPage() {
           </p>
 
           <div className="mt-7 flex flex-col justify-center gap-2.5 sm:mt-8 sm:flex-row sm:gap-3">
-            <OpenConsultLink className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-xs font-semibold text-black transition-all hover:bg-white/90 active:scale-[0.98]">
+            <OpenConsultLink className="inline-flex items-center justify-center gap-2 rounded-xl bg-fog px-6 py-3.5 text-xs font-semibold text-ink transition-all hover:opacity-90 active:scale-[0.98]">
               <span>Ekspert bilan bog&apos;lanish</span>
               <ArrowRight className="size-3.5" />
             </OpenConsultLink>
 
             <TransitionLink
               href="/catalog"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-white/5 px-6 py-3.5 text-xs font-semibold text-fog transition-all hover:bg-white/10"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-panel-2 px-6 py-3.5 text-xs font-semibold text-fog transition-all hover:bg-fog/10"
             >
               <span>Barcha Mahsulotlar</span>
             </TransitionLink>

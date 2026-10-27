@@ -42,7 +42,7 @@ export const site = {
   ],
   nav: [
     { href: "/catalog", label: "Kategoriyalar" },
-    { href: "/custom-pc", label: "PC Konfigurator" },
+    { href: "/custom-pc", label: "Tayyor PC-lar" },
     { href: "/benefits", label: "Afzalliklar" },
     { href: "/brands", label: "Brendlar" },
   ],

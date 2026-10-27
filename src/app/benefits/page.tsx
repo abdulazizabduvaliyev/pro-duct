@@ -114,7 +114,7 @@ export default function BenefitsPage() {
     <div className="mx-auto max-w-[1440px] px-4 pb-24 pt-20 sm:px-6 sm:pt-24 md:px-10 md:pb-28 md:pt-28">
       {/* ── Breadcrumb ── */}
       <nav aria-label="Yo'l" className="mb-6 flex items-center gap-1.5 text-xs text-ash">
-        <TransitionLink href="/" className="transition-colors hover:text-white">
+        <TransitionLink href="/" className="transition-colors hover:text-fog">
           Bosh sahifa
         </TransitionLink>
         <ChevronRight className="size-3.5" />
@@ -124,7 +124,7 @@ export default function BenefitsPage() {
       {/* ── Page Header ── */}
       <div className="mb-10 flex flex-col items-start gap-3 sm:gap-4 md:mb-16">
         <span className="glass inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium tracking-wide text-smoke sm:px-4">
-          <Sparkles className="size-3.5 text-white" />
+          <Sparkles className="size-3.5 text-fog" />
           PRO DUCT Standartlari
         </span>
 
@@ -144,7 +144,7 @@ export default function BenefitsPage() {
             key={stat.label}
             className="rounded-2xl border border-line bg-panel/60 p-4 text-center backdrop-blur-md sm:rounded-3xl sm:p-6"
           >
-            <p className="font-mono text-xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
+            <p className="font-mono text-xl font-bold tracking-tight text-fog sm:text-3xl md:text-4xl">
               {stat.value}
             </p>
             <h3 className="mt-1.5 text-xs font-semibold text-fog sm:mt-2 sm:text-sm">
@@ -163,7 +163,7 @@ export default function BenefitsPage() {
           <span className="text-[11px] font-medium uppercase tracking-wider text-ash">
             Bizning Kafolatlarimiz
           </span>
-          <h2 className="mt-1 text-2xl font-bold tracking-tight text-white sm:text-3xl">
+          <h2 className="mt-1 text-2xl font-bold tracking-tight text-fog sm:text-3xl">
             Siz Uchun Yaratilgan Afzalliklar
           </h2>
         </div>
@@ -176,15 +176,15 @@ export default function BenefitsPage() {
             >
               <div>
                 <div className="flex items-center justify-between">
-                  <span className="flex size-10 items-center justify-center rounded-xl border border-line bg-white/5 text-white transition-all duration-300 group-hover:scale-105 group-hover:bg-white group-hover:text-black sm:size-11 sm:rounded-2xl">
+                  <span className="flex size-10 items-center justify-center rounded-xl border border-line bg-fog/5 text-fog transition-all duration-300 group-hover:scale-105 group-hover:bg-fog group-hover:text-ink sm:size-11 sm:rounded-2xl">
                     <item.icon className="size-5" />
                   </span>
-                  <span className="rounded-full border border-line bg-white/5 px-2.5 py-0.5 font-mono text-[10px] text-ash">
+                  <span className="rounded-full border border-line bg-panel-2 px-2.5 py-0.5 font-mono text-[10px] text-ash">
                     {item.badge}
                   </span>
                 </div>
 
-                <h3 className="mt-4 text-base font-semibold tracking-tight text-fog transition-colors group-hover:text-white sm:mt-5">
+                <h3 className="mt-4 text-base font-semibold tracking-tight text-fog transition-colors sm:mt-5">
                   {item.title}
                 </h3>
 
@@ -203,7 +203,7 @@ export default function BenefitsPage() {
           <span className="text-[11px] font-medium uppercase tracking-wider text-ash">
             Oddiy va Shaffof
           </span>
-          <h2 className="mt-1 text-2xl font-bold tracking-tight text-white sm:text-3xl">
+          <h2 className="mt-1 text-2xl font-bold tracking-tight text-fog sm:text-3xl">
             Xarid Qilish Qanday Kechadi?
           </h2>
           <p className="mt-1 text-xs text-smoke sm:text-sm">
@@ -215,13 +215,13 @@ export default function BenefitsPage() {
           {STEPS.map((s) => (
             <div
               key={s.step}
-              className="relative flex flex-col justify-between rounded-2xl border border-line/60 bg-black/30 p-5 sm:p-6"
+              className="relative flex flex-col justify-between rounded-2xl border border-line/60 bg-panel/40 p-5 sm:p-6"
             >
               <div>
                 <span className="font-mono text-2xl font-bold text-ash/40">
                   {s.step}
                 </span>
-                <h3 className="mt-2.5 text-base font-semibold text-white sm:mt-3">
+                <h3 className="mt-2.5 text-base font-semibold text-fog sm:mt-3">
                   {s.title}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-smoke">
@@ -234,9 +234,9 @@ export default function BenefitsPage() {
       </div>
 
       {/* ── Bottom Call To Action ── */}
-      <div className="relative overflow-hidden rounded-2xl border border-line bg-gradient-to-b from-[#141418] to-ink p-6 text-center sm:rounded-3xl sm:p-14">
+      <div className="relative overflow-hidden rounded-2xl border border-line bg-gradient-to-b from-panel to-ink p-6 text-center sm:rounded-3xl sm:p-14">
         <div className="relative z-10 mx-auto max-w-xl">
-          <h2 className="text-xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
+          <h2 className="text-xl font-bold tracking-tight text-fog sm:text-3xl md:text-4xl">
             Orzuingizdagi texnikani tanlashga tayyormisiz?
           </h2>
           <p className="mt-3 text-xs leading-relaxed text-smoke sm:text-sm">
@@ -246,7 +246,7 @@ export default function BenefitsPage() {
           <div className="mt-7 flex flex-col justify-center gap-2.5 sm:mt-8 sm:flex-row sm:gap-3">
             <TransitionLink
               href="/catalog"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-xs font-semibold text-black transition-all hover:bg-white/90 active:scale-[0.98]"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-fog px-6 py-3.5 text-xs font-semibold text-ink transition-all hover:opacity-90 active:scale-[0.98]"
             >
               <span>Mahsulotlar Katalogi</span>
               <ArrowRight className="size-3.5" />
@@ -254,7 +254,7 @@ export default function BenefitsPage() {
 
             <TransitionLink
               href="/custom-pc"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-white/5 px-6 py-3.5 text-xs font-semibold text-fog transition-all hover:bg-white/10"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-panel-2 px-6 py-3.5 text-xs font-semibold text-fog transition-all hover:bg-fog/10"
             >
               <span>PC Konfigurator</span>
             </TransitionLink>

@@ -6,6 +6,7 @@ import { cn, formatPrice } from "@/lib/utils";
 import { submitLead } from "@/lib/lead";
 import { store, useCart } from "@/lib/store";
 import { useUI } from "@/lib/ui-state";
+import { useI18n } from "@/lib/i18n";
 import { site } from "@/lib/site";
 import { gsap } from "@/components/animations/gsap";
 import { EASE } from "@/components/animations/motion";
@@ -20,6 +21,7 @@ const field =
 export function ConsultModal() {
   const { consult, closeConsult } = useUI();
   const { lines, total } = useCart();
+  const { t } = useI18n();
   const isOrder = consult.mode === "order";
 
   const root = useRef<HTMLDivElement>(null);
@@ -111,66 +113,72 @@ export function ConsultModal() {
             type="button"
             onClick={close}
             aria-label="Yopish"
-            className="absolute right-3.5 top-3.5 flex size-9 items-center justify-center rounded-full text-smoke transition-colors hover:bg-white/10 hover:text-white sm:right-4 sm:top-4 sm:size-10"
+            className="absolute right-3.5 top-3.5 flex size-9 items-center justify-center rounded-full text-smoke transition-colors hover:bg-fog/10 hover:text-fog sm:right-4 sm:top-4 sm:size-10"
           >
             <X className="size-5" />
           </button>
 
           {status === "done" ? (
             <div className="flex flex-col items-center gap-4 py-6 text-center sm:gap-5 sm:py-8">
-              <div ref={check} className="flex size-16 items-center justify-center rounded-full bg-white text-black sm:size-20">
+              <div ref={check} className="flex size-16 items-center justify-center rounded-full bg-fog text-ink sm:size-20">
                 <Check className="size-8 sm:size-10" strokeWidth={2.4} />
               </div>
-              <h2 className="text-xl font-semibold tracking-tight sm:text-2xl">Rahmat!</h2>
+              <h2 className="text-xl font-semibold tracking-tight sm:text-2xl">
+                {t({ uz: "Rahmat!", ru: "Спасибо!" })}
+              </h2>
               <p className="max-w-xs text-xs text-smoke sm:text-sm">
-                {isOrder ? "Buyurtmangiz qabul qilindi." : "So'rovingiz qabul qilindi."} Menejerimiz tez orada siz bilan bog&apos;lanadi.
+                {isOrder
+                  ? t({ uz: "Buyurtmangiz qabul qilindi. Menejerimiz tez orada siz bilan bog'lanadi.", ru: "Ваш заказ принят. Наш менеджер скоро свяжется с вами." })
+                  : t({ uz: "So'rovingiz qabul qilindi. Menejerimiz tez orada siz bilan bog'lanadi.", ru: "Ваша заявка принята. Наш менеджер скоро свяжется с вами." })}
               </p>
               <button
                 type="button"
                 onClick={close}
                 className="mt-2 inline-flex h-10 items-center rounded-full bg-white/10 px-5 text-xs font-medium transition-colors hover:bg-white/15 sm:h-11 sm:px-6 sm:text-sm"
               >
-                Yopish
+                {t({ uz: "Yopish", ru: "Закрыть" })}
               </button>
             </div>
           ) : (
             <form onSubmit={onSubmit} noValidate className="flex flex-col gap-3.5 sm:gap-4">
               <div className="pr-10">
                 <p className="text-xs font-medium uppercase tracking-[0.14em] text-ash">
-                  {isOrder ? "Buyurtma" : "Konsultatsiya"}
+                  {isOrder ? t({ uz: "Buyurtma", ru: "Заказ" }) : t("nav.consult")}
                 </p>
                 <h2 className="mt-1.5 text-xl font-semibold leading-tight tracking-[-0.02em] sm:mt-2 sm:text-2xl md:text-3xl">
-                  {isOrder ? "Buyurtmani rasmiylashtiring" : "Mos qurilmani birga tanlaymiz"}
+                  {isOrder
+                    ? t({ uz: "Buyurtmani rasmiylashtiring", ru: "Оформите заказ" })
+                    : t({ uz: "Mos qurilmani birga tanlaymiz", ru: "Поможем выбрать устройство" })}
                 </h2>
                 <p className="mt-1.5 text-xs text-smoke sm:mt-2 sm:text-sm">
                   {isOrder
-                    ? "Ma'lumotlaringizni qoldiring — menejer tasdiqlash va yetkazib berish uchun bog'lanadi."
-                    : "Raqamingizni qoldiring — mutaxassisimiz qo'ng'iroq qilib, savollaringizga javob beradi."}
+                    ? t({ uz: "Ma'lumotlaringizni qoldiring — menejer tasdiqlash va yetkazib berish uchun bog'lanadi.", ru: "Оставьте данные — менеджер свяжется для подтверждения и доставки." })
+                    : t({ uz: "Raqamingizni qoldiring — mutaxassisimiz qo'ng'iroq qilib, savollaringizga javob beradi.", ru: "Оставьте номер — специалист перезвонит и ответит на все вопросы." })}
                 </p>
               </div>
 
               {consult.subject ? (
                 <div className="rounded-2xl border border-line bg-white/4 px-4 py-3 text-sm text-smoke">
-                  <span className="text-ash">{isOrder ? "Savat: " : "Mavzu: "}</span>
+                  <span className="text-ash">{isOrder ? `${t("cart.title")}: ` : `${t({ uz: "Mavzu: ", ru: "Тема: " })}`}</span>
                   {consult.subject}
-                  {isOrder ? <span className="mt-1 block font-medium text-fog">Jami: {formatPrice(total)}</span> : null}
+                  {isOrder ? <span className="mt-1 block font-medium text-fog">{t("cart.total")}: {formatPrice(total)}</span> : null}
                 </div>
               ) : null}
 
               <label className="flex flex-col gap-1.5">
-                <span className="text-xs text-smoke">Ismingiz</span>
+                <span className="text-xs text-smoke">{t("consult.nameLabel")}</span>
                 <input
                   ref={firstField}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   autoComplete="name"
-                  placeholder="Ism"
+                  placeholder={t({ uz: "Ism", ru: "Имя" })}
                   className={field}
                 />
               </label>
 
               <label className="flex flex-col gap-1.5">
-                <span className="text-xs text-smoke">Telefon raqami</span>
+                <span className="text-xs text-smoke">{t("consult.phoneLabel")}</span>
                 <input
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
@@ -183,12 +191,12 @@ export function ConsultModal() {
               </label>
 
               <label className="flex flex-col gap-1.5">
-                <span className="text-xs text-smoke">Izoh (ixtiyoriy)</span>
+                <span className="text-xs text-smoke">{t("consult.commentLabel")}</span>
                 <textarea
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   rows={3}
-                  placeholder="Qaysi qurilma yoki qanday vazifa uchun kerak?"
+                  placeholder={t({ uz: "Qaysi qurilma yoki qanday vazifa uchun kerak?", ru: "Для каких задач или какое устройство вас интересует?" })}
                   className={cn(field, "h-auto resize-none py-3")}
                 />
               </label>
@@ -205,10 +213,11 @@ export function ConsultModal() {
                 className="mt-1 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white text-sm font-medium text-black transition-colors hover:bg-white/90 disabled:opacity-60 sm:h-13 sm:text-[15px]"
               >
                 {status === "sending" ? (
-                  "Yuborilmoqda…"
+                  t({ uz: "Yuborilmoqda…", ru: "Отправка…" })
                 ) : (
                   <>
-                    <Send className="size-4" /> {isOrder ? "Buyurtmani yuborish" : "So'rov yuborish"}
+                    <Send className="size-4" />
+                    <span>{t("consult.sendBtn")}</span>
                   </>
                 )}
               </button>

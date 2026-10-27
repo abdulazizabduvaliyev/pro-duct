@@ -10,12 +10,20 @@ import { OpenConsult } from "@/components/ui/OpenConsult";
 import { Price } from "@/components/ui/Price";
 import { SplitWords } from "@/components/ui/SplitWords";
 import { Macbook3D } from "@/components/3d/Macbook3D";
+import { useI18n } from "@/lib/i18n";
 
-const stepCopy = [
-  "Har bir detal — ish va dam olish uchun qulaylik yaratadi.",
-  "Kundalik vazifalardan og'ir loyihalargacha — hammasiga tayyor.",
-  "Uzoq vaqt ishonchli xizmat qilishi uchun puxta tayyorlangan.",
-];
+const stepCopy = {
+  uz: [
+    "Har bir detal — ish va dam olish uchun qulaylik yaratadi.",
+    "Kundalik vazifalardan og'ir loyihalargacha — hammasiga tayyor.",
+    "Uzoq vaqt ishonchli xizmat qilishi uchun puxta tayyorlangan.",
+  ],
+  ru: [
+    "Каждая деталь создана для комфортной работы и отдыха.",
+    "Готов ко всему — от повседневных задач до сложных проектов.",
+    "Создан для долгой и надежной службы без компромиссов.",
+  ],
+};
 
 /**
  * Product Showcase (TZ §4): the flagship is pinned full-screen and scroll
@@ -26,6 +34,7 @@ export function ProductShowcase() {
   const root = useRef<HTMLElement>(null);
   const scrollProgressRef = useRef(0);
   const product = getProduct("macbook-pro-14");
+  const { t, lang } = useI18n();
 
   useGSAP(
     () => {
@@ -78,17 +87,20 @@ export function ProductShowcase() {
         const glow = q("[data-sc='glow']");
         const bar = q("[data-sc='bar'] > span");
 
-        gsap.set(steps, { yPercent: -50, opacity: 0 });
+        gsap.set(steps, { yPercent: -50, opacity: 0, force3D: true });
+        gsap.set([prod, intro, cta, glow], { force3D: true });
 
         const tl = gsap.timeline({
           defaults: { ease: EASE.none },
           scrollTrigger: {
             trigger: el,
             start: "top top",
-            end: "+=460%",
-            scrub: 1,
+            end: "+=420%",
+            scrub: 0.4,
             pin: true,
             anticipatePin: 1,
+            fastScrollEnd: true,
+            preventOverlaps: true,
             invalidateOnRefresh: true,
             onUpdate: (self) => {
               scrollProgressRef.current = self.progress;
@@ -102,7 +114,7 @@ export function ProductShowcase() {
           { scale: 0.95, yPercent: 0, opacity: 1, duration: 1.2, ease: "power1.out" },
           0,
         )
-          .fromTo(glow, { scale: 0.6, opacity: 0 }, { scale: 1.25, opacity: 1, duration: 9 }, 0)
+          .fromTo(glow, { opacity: 0 }, { opacity: 0.85, duration: 1.5, ease: "power1.out" }, 0)
           .to(bar, { scaleX: 1, duration: 9 }, 0)
           .to(intro, { opacity: 0, y: -50, duration: 0.8 }, 0.8)
           // ── 1. Step 1 (Left card, enters left to right) ───────────
@@ -166,7 +178,7 @@ export function ProductShowcase() {
       <div className="sc-stage relative mx-auto flex max-w-[1440px] flex-col items-center px-4 sm:px-6 md:px-10">
         <div data-sc="intro" className="sc-intro text-center">
           <span className="glass inline-flex rounded-full px-4 py-1.5 text-xs font-medium tracking-wide text-smoke">
-            Product showcase
+            {t("showcase.badge")}
           </span>
           <SplitWords
             as="h2"
@@ -178,7 +190,7 @@ export function ProductShowcase() {
         </div>
 
         <div className="sc-product relative mx-auto mt-12 w-[min(900px,100%)]">
-          <div data-sc="product" className="relative aspect-[4/3] w-full will-change-transform">
+          <div data-sc="product" className="relative aspect-[4/3] w-full will-change-transform [transform:translateZ(0)]">
             <Macbook3D mode="showcase" scrollProgressRef={scrollProgressRef} />
           </div>
         </div>
@@ -190,21 +202,21 @@ export function ProductShowcase() {
             key={h}
             data-sc="step"
             data-side={i % 2 === 0 ? "left" : "right"}
-            className="sc-step surface rounded-2xl p-5 md:p-6 [.sc-pinned_&]:border [.sc-pinned_&]:border-white/10 [.sc-pinned_&]:bg-black/60 [.sc-pinned_&]:backdrop-blur-xl [.sc-pinned_&]:shadow-2xl"
+            className="sc-step surface rounded-2xl p-5 md:p-6 [.sc-pinned_&]:border [.sc-pinned_&]:border-line [.sc-pinned_&]:bg-panel/95 [.sc-pinned_&]:backdrop-blur-sm [.sc-pinned_&]:shadow-xl [transform:translateZ(0)]"
           >
             <div className="flex items-center gap-2.5">
-              <span className="inline-flex size-6 items-center justify-center rounded-full border border-white/15 bg-white/10 font-mono text-[11px] font-semibold text-white">
+              <span className="inline-flex size-6 items-center justify-center rounded-full border border-line bg-panel-2 font-mono text-[11px] font-semibold text-fog">
                 0{i + 1}
               </span>
               <span className="text-[11px] font-medium uppercase tracking-widest text-ash">
                 MacBook Pro M3
               </span>
             </div>
-            <h3 className="mt-3 text-lg font-semibold leading-snug tracking-[-0.025em] text-white md:text-xl">
+            <h3 className="mt-3 text-lg font-semibold leading-snug tracking-[-0.025em] text-fog md:text-xl">
               {h}
             </h3>
             <p className="mt-2 text-[13px] leading-relaxed text-smoke">
-              {stepCopy[i]}
+              {stepCopy[lang]?.[i] ?? stepCopy.uz[i]}
             </p>
           </li>
         ))}
@@ -214,10 +226,10 @@ export function ProductShowcase() {
         <Price price={product.price} oldPrice={product.oldPrice} size="lg" className="justify-center" />
         <div className="flex w-full max-w-xs flex-col items-stretch gap-2.5 sm:w-auto sm:max-w-none sm:flex-row sm:items-center">
           <Button href={`/product/${product.slug}`} size="lg" magnetic icon={<ArrowRight className="size-4" />} className="w-full sm:w-auto">
-            Batafsil ko&apos;rish
+            {t("showcase.detailsBtn")}
           </Button>
           <OpenConsult variant="secondary" size="lg" subject={product.name} className="w-full sm:w-auto">
-            Konsultatsiya
+            {t("showcase.consultBtn")}
           </OpenConsult>
         </div>
       </div>

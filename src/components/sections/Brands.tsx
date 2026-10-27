@@ -31,7 +31,7 @@ export function Brands() {
               <TransitionLink
                 href={`/catalog?brand=${b.slug}`}
                 className={cn(
-                  "group relative flex h-24 flex-col items-center justify-center overflow-hidden rounded-2xl border border-line text-ash transition-all duration-500 ease-apple hover:border-white/25 hover:bg-white/5 hover:text-white sm:h-28 sm:rounded-[28px] md:h-40",
+                  "group relative flex h-24 flex-col items-center justify-center overflow-hidden rounded-2xl border border-line text-ash transition-all duration-500 ease-apple hover:border-line-strong hover:bg-fog/5 hover:text-fog sm:h-28 sm:rounded-[28px] md:h-40",
                   i === 0 && "text-fog",
                 )}
               >
@@ -39,7 +39,7 @@ export function Brands() {
                   <BrandLogo
                     brand={b.slug}
                     className={cn(
-                      "shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:text-white",
+                      "shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:text-fog",
                       i === 0 ? "size-6 text-smoke sm:size-7 md:size-9" : "size-4 text-ash sm:size-5 md:size-6",
                     )}
                   />
@@ -59,7 +59,7 @@ export function Brands() {
       <div className="mt-8 flex justify-center sm:mt-12">
         <TransitionLink
           href="/brands"
-          className="group inline-flex items-center justify-center gap-2 rounded-full border border-line bg-white/5 px-5 py-2.5 text-center text-xs font-medium text-fog transition-all hover:border-white/20 hover:bg-white/10 hover:text-white sm:px-6 sm:py-3"
+          className="group inline-flex items-center justify-center gap-2 rounded-full border border-line bg-panel-2 px-5 py-2.5 text-center text-xs font-medium text-fog transition-all hover:border-line-strong hover:bg-fog/10 hover:text-fog sm:px-6 sm:py-3"
         >
           <span>Barcha rasmiy brendlar bilan tanishish</span>
           <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" />

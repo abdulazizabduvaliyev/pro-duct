@@ -88,7 +88,13 @@ const jsonLd = {
  * for reduced motion — so GSAP's starting states (hidden reveals) never flash
  * and nothing stays hidden without JS.
  */
-const animFlag = `(function(){try{if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('anim')}catch(e){}})();`;
+const animFlag = `(function(){try{
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('anim');
+  var t=localStorage.getItem('pro-duct:theme');
+  if(t==='light'){document.documentElement.classList.add('light');document.documentElement.setAttribute('data-theme','light');}
+  var l=localStorage.getItem('pro-duct:lang');
+  if(l){document.documentElement.setAttribute('lang',l);}
+}catch(e){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

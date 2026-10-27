@@ -54,8 +54,8 @@ function serialize(f: Filters) {
 
 const chip =
   "shrink-0 rounded-full border px-4 py-2 text-[13px] font-medium tracking-tight transition-colors duration-300";
-const chipOn = "border-white bg-white text-black";
-const chipOff = "border-line bg-white/4 text-fog/80 hover:bg-white/10 hover:text-white";
+const chipOn = "border-fog bg-fog text-ink shadow-sm";
+const chipOff = "border-line bg-panel text-fog/80 hover:bg-fog/10 hover:text-fog";
 
 /**
  * Catalogue with category / brand filtering, search, sorting and availability.
@@ -251,7 +251,7 @@ export function CatalogView() {
               <button
                 type="button"
                 onClick={() => update({ ...DEFAULTS })}
-                className="inline-flex h-8.5 items-center gap-1 rounded-full px-2.5 text-xs text-smoke transition-colors hover:text-white sm:h-9 sm:px-3"
+                className="inline-flex h-8.5 items-center gap-1 rounded-full px-2.5 text-xs text-smoke transition-colors hover:text-fog sm:h-9 sm:px-3"
               >
                 <X className="size-3.5" /> Tozalash
               </button>

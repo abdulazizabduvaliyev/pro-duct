@@ -8,9 +8,15 @@ import { clone } from "three/examples/jsm/utils/SkeletonUtils.js";
 // Cached GLTF model so we only download 10.6MB once across the entire site
 let cachedGltf: GLTF | null = null;
 let loadPromise: Promise<GLTF> | null = null;
+const progressListeners = new Set<(percent: number) => void>();
 
-function loadMacbookGltf(): Promise<GLTF> {
-  if (cachedGltf) return Promise.resolve(cachedGltf);
+export function preloadMacbookModel(onProgress?: (percent: number) => void): Promise<GLTF> {
+  if (onProgress) progressListeners.add(onProgress);
+
+  if (cachedGltf) {
+    if (onProgress) onProgress(100);
+    return Promise.resolve(cachedGltf);
+  }
   if (loadPromise) return loadPromise;
 
   loadPromise = new Promise((resolve, reject) => {
@@ -19,17 +25,37 @@ function loadMacbookGltf(): Promise<GLTF> {
       "/macbook_pro_m3_16_inch_2024.glb",
       (gltf) => {
         cachedGltf = gltf;
+        progressListeners.forEach((fn) => fn(100));
+        progressListeners.clear();
         resolve(gltf);
       },
-      undefined,
+      (xhr) => {
+        if (xhr.lengthComputable && xhr.total > 0) {
+          const percent = Math.min(99, Math.round((xhr.loaded / xhr.total) * 100));
+          progressListeners.forEach((fn) => fn(percent));
+        }
+      },
       (err) => {
         console.error("Failed to load MacBook 3D model:", err);
+        progressListeners.clear();
         reject(err);
       },
     );
   });
 
   return loadPromise;
+}
+
+function getTargetPixelRatio(): number {
+  if (typeof window === "undefined") return 1;
+  const dpr = window.devicePixelRatio || 1;
+  const isLowTier =
+    (typeof navigator !== "undefined" &&
+      ((navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) ||
+        ("deviceMemory" in navigator && (navigator as { deviceMemory?: number }).deviceMemory! <= 4))) ||
+    dpr < 1.5;
+
+  return Math.min(dpr, isLowTier ? 1.25 : 1.5);
 }
 
 export type Macbook3DProps = {
@@ -98,9 +124,9 @@ export function Macbook3D({
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
       antialias: true,
-      powerPreference: "high-performance",
+      powerPreference: "default",
     });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(getTargetPixelRatio());
     renderer.setSize(width, height);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.25;
@@ -142,7 +168,7 @@ export function Macbook3D({
     pivotRef.current = pivot;
 
     // ── 4. Load & Setup Model ───────────────────────────────
-    loadMacbookGltf()
+    preloadMacbookModel()
       .then((gltf) => {
         if (isDisposed) return;
 
@@ -166,16 +192,19 @@ export function Macbook3D({
         model.position.y = -center.y * scale + 0.22;
         model.position.z = -center.z * scale;
 
-        // Enhance material reflectivity for dark mode
+        // Freeze static child matrix calculations for massive CPU savings
         model.traverse((child) => {
-          if (child instanceof THREE.Mesh && child.material) {
+          if (child instanceof THREE.Mesh) {
             child.castShadow = false;
             child.receiveShadow = false;
+            child.matrixAutoUpdate = false;
+            child.updateMatrix();
             if (
+              child.material &&
               "metalness" in child.material &&
               typeof (child.material as THREE.MeshStandardMaterial).envMapIntensity === "number"
             ) {
-              (child.material as THREE.MeshStandardMaterial).envMapIntensity = 1.4;
+              (child.material as THREE.MeshStandardMaterial).envMapIntensity = 1.3;
             }
           }
         });
@@ -310,23 +339,28 @@ export function Macbook3D({
           const targetShowcaseRotX =
             initialRotationX + Math.sin(progress * Math.PI) * 0.12;
 
-          pivot.rotation.y += (targetShowcaseRotY - pivot.rotation.y) * 0.1;
-          pivot.rotation.x += (targetShowcaseRotX - pivot.rotation.x) * 0.1;
-          pivot.position.y = Math.sin(elapsedTime * 0.7) * 0.03;
+          pivot.rotation.y += (targetShowcaseRotY - pivot.rotation.y) * 0.22;
+          pivot.rotation.x += (targetShowcaseRotX - pivot.rotation.x) * 0.22;
+          pivot.position.y = Math.sin(elapsedTime * 0.7) * 0.02;
         } else {
           // Hero mode: mouse tilt + subtle breathing float
-          pivot.rotation.y += (targetRotY - pivot.rotation.y) * 0.06;
-          pivot.rotation.x += (targetRotX - pivot.rotation.x) * 0.06;
+          pivot.rotation.y += (targetRotY - pivot.rotation.y) * 0.08;
+          pivot.rotation.x += (targetRotX - pivot.rotation.x) * 0.08;
 
           // Subtle idle float
           if (!isDragging) {
-            pivot.position.y = Math.sin(elapsedTime * 1.2) * 0.05;
+            pivot.position.y = Math.sin(elapsedTime * 1.2) * 0.04;
           }
         }
       }
 
       renderer.render(scene, camera);
     };
+
+    const onVisibilityChange = () => {
+      isVisible = document.visibilityState === "visible";
+    };
+    document.addEventListener("visibilitychange", onVisibilityChange, { passive: true });
 
     animate();
 
@@ -336,6 +370,7 @@ export function Macbook3D({
       cancelAnimationFrame(animId);
       observer.disconnect();
       resizeObserver.disconnect();
+      document.removeEventListener("visibilitychange", onVisibilityChange);
 
       window.removeEventListener("pointermove", onPointerMove);
       container.removeEventListener("pointerdown", onPointerDown);

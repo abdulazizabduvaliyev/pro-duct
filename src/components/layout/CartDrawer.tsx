@@ -5,6 +5,7 @@ import { Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
 import { store, useCart } from "@/lib/store";
 import { useUI } from "@/lib/ui-state";
+import { useI18n } from "@/lib/i18n";
 import { useOverlay } from "@/components/animations/useOverlay";
 import { ProductMedia } from "@/components/products/ProductMedia";
 import { TransitionLink } from "./TransitionLink";
@@ -13,6 +14,7 @@ import { TransitionLink } from "./TransitionLink";
 export function CartDrawer() {
   const { cartOpen, setCartOpen, openConsult } = useUI();
   const { lines, count, total } = useCart();
+  const { t } = useI18n();
 
   const root = useRef<HTMLDivElement>(null);
   const backdrop = useRef<HTMLDivElement>(null);
@@ -28,7 +30,7 @@ export function CartDrawer() {
       className="fixed inset-0 z-[90] hidden"
       role="dialog"
       aria-modal="true"
-      aria-label="Savat"
+      aria-label={t("cart.title")}
     >
       <div ref={backdrop} onClick={close} className="absolute inset-0 bg-black/60 opacity-0 backdrop-blur-sm" />
 
@@ -39,14 +41,14 @@ export function CartDrawer() {
       >
         <header className="flex items-center justify-between border-b border-line px-5 py-4 sm:px-6 sm:py-5">
           <div>
-            <h2 className="text-base font-semibold tracking-tight sm:text-lg">Savat</h2>
-            <p className="text-xs text-ash sm:text-sm">{count > 0 ? `${count} ta mahsulot` : "Hozircha bo'sh"}</p>
+            <h2 className="text-base font-semibold tracking-tight sm:text-lg">{t("cart.title")}</h2>
+            <p className="text-xs text-ash sm:text-sm">{count > 0 ? `${count} ta mahsulot` : t("cart.emptyTitle")}</p>
           </div>
           <button
             type="button"
             onClick={close}
             aria-label="Savatni yopish"
-            className="flex size-9 items-center justify-center rounded-full text-smoke transition-colors hover:bg-white/10 hover:text-white sm:size-10"
+            className="flex size-9 items-center justify-center rounded-full text-smoke transition-colors hover:bg-fog/10 hover:text-fog sm:size-10"
           >
             <X className="size-5" />
           </button>
@@ -58,14 +60,14 @@ export function CartDrawer() {
               <ShoppingBag className="size-6 text-smoke sm:size-7" strokeWidth={1.5} />
             </div>
             <div>
-              <p className="text-base font-medium sm:text-lg">Savat bo&apos;sh</p>
-              <p className="mt-1 text-xs text-smoke sm:text-sm">Katalogdan o&apos;zingizga mos qurilmani tanlang.</p>
+              <p className="text-base font-medium sm:text-lg">{t("cart.emptyTitle")}</p>
+              <p className="mt-1 text-xs text-smoke sm:text-sm">{t("cart.emptyDesc")}</p>
             </div>
             <TransitionLink
               href="/catalog"
               className="inline-flex h-10 items-center rounded-full bg-white px-5 text-xs font-medium text-black sm:h-11 sm:px-6 sm:text-sm"
             >
-              Katalogga o&apos;tish
+              {t("nav.catalog")}
             </TransitionLink>
           </div>
         ) : (
@@ -89,7 +91,7 @@ export function CartDrawer() {
                         <div className="min-w-0">
                           <TransitionLink
                             href={`/product/${line.product.slug}`}
-                            className="block truncate text-sm font-medium text-fog hover:text-white sm:text-[15px]"
+                            className="block truncate text-sm font-medium text-fog hover:text-fog/70 sm:text-[15px]"
                           >
                             {line.product.name}
                           </TransitionLink>
@@ -99,7 +101,7 @@ export function CartDrawer() {
                           type="button"
                           onClick={() => store.removeLine(line.key)}
                           aria-label={`${line.product.name} — savatdan olib tashlash`}
-                          className="text-ash transition-colors hover:text-white"
+                          className="text-ash transition-colors hover:text-rose-400"
                         >
                           <Trash2 className="size-4" strokeWidth={1.7} />
                         </button>
@@ -111,7 +113,7 @@ export function CartDrawer() {
                             type="button"
                             onClick={() => store.setQty(line.key, line.qty - 1)}
                             aria-label="Kamaytirish"
-                            className="flex size-7 items-center justify-center text-smoke hover:text-white sm:size-8"
+                            className="flex size-7 items-center justify-center text-smoke hover:text-fog sm:size-8"
                           >
                             <Minus className="size-3" />
                           </button>
@@ -120,7 +122,7 @@ export function CartDrawer() {
                             type="button"
                             onClick={() => store.setQty(line.key, line.qty + 1)}
                             aria-label="Ko'paytirish"
-                            className="flex size-7 items-center justify-center text-smoke hover:text-white sm:size-8"
+                            className="flex size-7 items-center justify-center text-smoke hover:text-fog sm:size-8"
                           >
                             <Plus className="size-3" />
                           </button>
@@ -137,10 +139,15 @@ export function CartDrawer() {
 
             <footer className="border-t border-line bg-panel px-4 pb-6 pt-4 sm:px-6 sm:pb-6 sm:pt-5">
               <div className="flex items-baseline justify-between">
-                <span className="text-xs text-smoke sm:text-sm">Jami</span>
+                <span className="text-xs text-smoke sm:text-sm">{t("cart.total")}</span>
                 <span className="text-xl font-semibold tracking-tight tabular-nums sm:text-2xl">{formatPrice(total)}</span>
               </div>
-              <p className="mt-1 text-[11px] text-ash sm:text-xs">Yetkazib berish va to&apos;lov shartlari buyurtma vaqtida kelishiladi.</p>
+              <p className="mt-1 text-[11px] text-ash sm:text-xs">
+                {t({
+                  uz: "Yetkazib berish va to'lov shartlari buyurtma vaqtida kelishiladi.",
+                  ru: "Условия доставки и оплаты согласовываются при оформлении заказа.",
+                })}
+              </p>
               <button
                 type="button"
                 onClick={() =>
@@ -151,14 +158,14 @@ export function CartDrawer() {
                 }
                 className="mt-3.5 inline-flex h-11 w-full items-center justify-center rounded-full bg-white text-sm font-medium text-black transition-colors hover:bg-white/90 sm:mt-4 sm:h-12"
               >
-                Buyurtma berish
+                {t("cart.checkout")}
               </button>
               <button
                 type="button"
                 onClick={() => store.clearCart()}
                 className="mt-2 w-full py-1.5 text-xs text-ash transition-colors hover:text-fog sm:py-2"
               >
-                Savatni tozalash
+                {t("cart.clear")}
               </button>
             </footer>
           </>

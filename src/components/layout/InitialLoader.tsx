@@ -6,6 +6,7 @@ import { EASE, MQ } from "@/components/animations/motion";
 import { forceUnlockScroll, getLenis, lockScroll, unlockScroll } from "@/lib/lenis";
 import { useUI } from "@/lib/ui-state";
 import { Logo } from "@/components/ui/Logo";
+import { preloadMacbookModel } from "@/components/3d/Macbook3D";
 
 /**
  * High-Performance Cinematic Preloader (Zero-Lag 120fps):
@@ -138,12 +139,19 @@ export function InitialLoader() {
         ease: "power2.out",
       }, 0.75);
 
-    // ── 2. Fluid Zero-Lag Progress Animation ─────────────────
+    // ── 2. Preload 3D Model During Opening Sequence ───────────
+    preloadMacbookModel((percent) => {
+      if (status && !isComplete && percent < 100) {
+        status.textContent = `3D Model (${percent}%)`;
+      }
+    }).catch(() => {});
+
+    // ── 3. Fluid Zero-Lag Progress Animation ─────────────────
     // Updates ONLY the DOM style.transform and textContent directly
     // Absolutely ZERO React re-renders = 100% pure 60/120fps smoothness!
     const progressTween = gsap.to(progressObj, {
       value: 100,
-      duration: 1.5,
+      duration: 1.6,
       ease: "power1.inOut",
       onUpdate: () => {
         const val = Math.min(100, progressObj.value);
@@ -175,7 +183,7 @@ export function InitialLoader() {
       if (status) {
         status.textContent = "Tayyor";
         status.classList.remove("text-ash");
-        status.classList.add("text-white");
+        status.classList.add("text-fog");
       }
 
       overlay.style.pointerEvents = "none";
@@ -230,7 +238,7 @@ export function InitialLoader() {
       id="initial-loader"
       ref={overlayRef}
       aria-hidden="true"
-      className="fixed inset-0 z-[250] flex flex-col items-center justify-center bg-[#050506] select-none overscroll-none"
+      className="fixed inset-0 z-[250] flex flex-col items-center justify-center bg-ink select-none overscroll-none"
       style={{ willChange: "transform" }}
     >
       {/* Ambient background atmosphere */}
@@ -259,19 +267,19 @@ export function InitialLoader() {
           className="mt-8 flex items-center gap-2.5 text-[11px] font-medium tracking-[0.28em] uppercase text-smoke"
         >
           <span className="relative flex size-1.5">
-            <span className="absolute inline-flex size-full rounded-full bg-white/70 animate-ping" />
-            <span className="relative inline-flex size-1.5 rounded-full bg-white" />
+            <span className="absolute inline-flex size-full rounded-full bg-fog/70 animate-ping" />
+            <span className="relative inline-flex size-1.5 rounded-full bg-fog" />
           </span>
           <span>Premium Tech Store</span>
         </div>
 
         {/* Precision Hardware-Accelerated Progress Bar */}
         <div ref={progressBoxRef} className="mt-7 w-[min(72vw,280px)]">
-          <div className="relative h-[2px] w-full overflow-hidden rounded-full bg-white/10 backdrop-blur-sm">
+          <div className="relative h-[2px] w-full overflow-hidden rounded-full bg-line backdrop-blur-sm">
             {/* GPU-composited scaleX fill — ZERO reflows */}
             <div
               ref={barRef}
-              className="size-full origin-left bg-white shadow-[0_0_12px_rgba(255,255,255,0.95)]"
+              className="size-full origin-left bg-fog shadow-[0_0_12px_rgba(255,255,255,0.95)]"
               style={{ transform: "scaleX(0.04)", willChange: "transform" }}
             />
           </div>

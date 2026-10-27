@@ -1,13 +1,12 @@
 "use client";
 
 import { useRef } from "react";
-import { ArrowRight, BatteryFull, Cpu, MonitorSmartphone, Wrench } from "lucide-react";
+import { BatteryFull, Cpu, MonitorSmartphone } from "lucide-react";
 import { gsap, useGSAP, withMotion } from "@/components/animations/gsap";
 import { EASE } from "@/components/animations/motion";
 import { Macbook3D } from "@/components/3d/Macbook3D";
-import { Button } from "@/components/ui/Button";
-import { OpenConsult } from "@/components/ui/OpenConsult";
 import { SplitWords } from "@/components/ui/SplitWords";
+import { useI18n } from "@/lib/i18n";
 
 const chips = [
   { icon: MonitorSmartphone, label: "Yorqin ekran", pos: "left-[3%] top-[26%] lg:left-[6%]", delay: "0s" },
@@ -22,6 +21,7 @@ const chips = [
  */
 export function Hero() {
   const root = useRef<HTMLElement>(null);
+  const { t } = useI18n();
 
   useGSAP(
     () => {
@@ -104,34 +104,22 @@ export function Hero() {
           className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium tracking-wide text-smoke"
         >
           <span className="relative flex size-1.5">
-            <span className="absolute inline-flex size-full rounded-full bg-white/70 [animation:pulse-ring_2s_ease-out_infinite]" />
-            <span className="relative inline-flex size-1.5 rounded-full bg-white" />
+            <span className="absolute inline-flex size-full rounded-full bg-fog/70 [animation:pulse-ring_2s_ease-out_infinite]" />
+            <span className="relative inline-flex size-1.5 rounded-full bg-fog" />
           </span>
-          Premium Tech Store
+          {t("hero.badge")}
         </span>
 
         <SplitWords
           as="h1"
-          text="Texnologiya. Premium darajada."
+          text={t("hero.title")}
           className="mt-6 block text-[clamp(2.15rem,7.5vw,7rem)] font-semibold leading-[1.08] tracking-[-0.04em] sm:mt-7"
           wordClassName="text-fade"
         />
 
         <p data-hero="fade" className="mt-5 max-w-xl text-sm leading-relaxed text-smoke sm:mt-7 sm:text-base md:text-xl">
-          MacBook, iPhone, iPad va boshqa premium qurilmalar — ishonchli kafolat va tezkor yetkazib berish bilan.
+          {t("hero.subtitle")}
         </p>
-
-        <div data-hero="fade" className="mt-8 flex w-full max-w-xs flex-col items-stretch gap-2.5 sm:w-auto sm:max-w-none sm:flex-row sm:items-center">
-          <Button href="/catalog" size="lg" magnetic icon={<ArrowRight className="size-4" />} className="w-full sm:w-auto">
-            Katalogni ko&apos;rish
-          </Button>
-          <Button href="/custom-pc" variant="secondary" size="lg" magnetic icon={<Wrench className="size-4" />} className="w-full sm:w-auto">
-            PC Konfigurator
-          </Button>
-          <OpenConsult variant="ghost" size="lg" magnetic className="w-full sm:w-auto">
-            Konsultatsiya
-          </OpenConsult>
-        </div>
       </div>
 
       {/* product layer */}
@@ -143,7 +131,7 @@ export function Hero() {
         {chips.map(({ icon: Icon, label, pos, delay }) => (
           <div key={label} data-hero="chip" className={`pointer-events-none absolute hidden md:block ${pos}`}>
             <div className="float-slow glass pointer-events-auto flex items-center gap-2.5 rounded-full py-2 pl-2.5 pr-4 text-[13px] font-medium text-fog" style={{ animationDelay: delay }}>
-              <span className="flex size-7 items-center justify-center rounded-full bg-white/10">
+              <span className="flex size-7 items-center justify-center rounded-full bg-fog/10">
                 <Icon className="size-3.5" strokeWidth={1.8} />
               </span>
               {label}

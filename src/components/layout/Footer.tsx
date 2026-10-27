@@ -1,14 +1,20 @@
+"use client";
+
+import { Clock, MapPin, Phone } from "lucide-react";
 import { categories } from "@/data/categories";
 import { site } from "@/lib/site";
 import { Logo } from "@/components/ui/Logo";
 import { OpenConsultLink } from "@/components/ui/OpenConsult";
+import { InstagramIcon, TelegramIcon, YoutubeIcon } from "@/components/ui/SocialIcons";
 import { TransitionLink } from "./TransitionLink";
+import { useI18n } from "@/lib/i18n";
 
-const linkCls = "text-sm text-smoke transition-colors duration-300 hover:text-white";
+const linkCls = "text-sm text-smoke transition-colors duration-300 hover:text-fog";
 
 export function Footer() {
   const year = new Date().getFullYear();
   const c = site.contacts;
+  const { t } = useI18n();
 
   return (
     <footer className="relative border-t border-line bg-ink">
@@ -19,15 +25,17 @@ export function Footer() {
               <Logo title="PRO DUCT" className="h-9 w-auto sm:h-10" />
             </TransitionLink>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-smoke">
-              Premium texnika do&apos;koni. Kompyuter, noutbuk, Apple qurilmalari, monitorlar va aksessuarlar — bir joyda.
+              {t("footer.tagline")}
             </p>
-            <OpenConsultLink className="mt-5 inline-flex h-11 items-center rounded-full border border-line-strong px-5 text-sm font-medium text-fog transition-colors hover:bg-white hover:text-black">
-              Konsultatsiya olish
+            <OpenConsultLink className="mt-5 inline-flex h-11 items-center rounded-full border border-line-strong px-5 text-sm font-medium text-fog transition-colors hover:bg-fog hover:text-ink">
+              {t("footer.consultBtn")}
             </OpenConsultLink>
           </div>
 
-          <nav aria-label="Katalog" className="lg:col-span-3 lg:col-start-5">
-            <h3 className="mb-4 text-xs font-medium uppercase tracking-[0.14em] text-ash">Katalog</h3>
+          <nav aria-label={t("footer.catalog")} className="lg:col-span-3 lg:col-start-5">
+            <h3 className="mb-4 text-xs font-medium uppercase tracking-[0.14em] text-ash">
+              {t("footer.catalog")}
+            </h3>
             <ul className="grid grid-cols-2 gap-x-4 gap-y-2.5 sm:grid-cols-1">
               {categories.map((cat) => (
                 <li key={cat.slug}>
@@ -39,85 +47,92 @@ export function Footer() {
             </ul>
           </nav>
 
-          <nav aria-label="Kompaniya" className="lg:col-span-2">
-            <h3 className="mb-4 text-xs font-medium uppercase tracking-[0.14em] text-ash">Sayt</h3>
+          <nav aria-label={t("footer.company")} className="lg:col-span-2">
+            <h3 className="mb-4 text-xs font-medium uppercase tracking-[0.14em] text-ash">
+              {t("footer.company")}
+            </h3>
             <ul className="flex flex-col gap-2.5">
               <li>
                 <TransitionLink href="/custom-pc" className={linkCls}>
-                  PC Konfigurator
+                  {t("nav.customPc")}
                 </TransitionLink>
               </li>
               <li>
                 <TransitionLink href="/catalog" className={linkCls}>
-                  Barcha mahsulotlar
+                  {t("nav.catalog")}
                 </TransitionLink>
               </li>
               <li>
                 <TransitionLink href="/benefits" className={linkCls}>
-                  Afzalliklar
+                  {t("nav.benefits")}
                 </TransitionLink>
               </li>
               <li>
                 <TransitionLink href="/brands" className={linkCls}>
-                  Brendlar
+                  {t("nav.brands")}
                 </TransitionLink>
               </li>
               <li>
                 <TransitionLink href="/wishlist" className={linkCls}>
-                  Tanlanganlar
+                  {t("nav.wishlist")}
                 </TransitionLink>
               </li>
             </ul>
           </nav>
 
           <div className="sm:col-span-2 lg:col-span-3">
-            <h3 className="mb-4 text-xs font-medium uppercase tracking-[0.14em] text-ash">Aloqa & Ijtimoiy Tarmoqlar</h3>
-            <ul className="flex flex-col gap-2.5">
+            <h3 className="mb-4 text-xs font-medium uppercase tracking-[0.14em] text-ash">
+              {t({ uz: "Aloqa & Ijtimoiy Tarmoqlar", ru: "Контакты & Соцсети" })}
+            </h3>
+            <ul className="flex flex-col gap-3">
               <li>
-                <a href={c.phoneHref} className="text-sm font-medium text-fog transition-colors hover:text-white">
-                  📞 {c.phone}
+                <a href={c.phoneHref} className="inline-flex items-center gap-2.5 text-sm font-medium text-fog transition-colors hover:text-fog/75">
+                  <Phone className="size-4 shrink-0 text-smoke" strokeWidth={1.8} />
+                  <span>{c.phone}</span>
                 </a>
               </li>
               <li>
-                <a href={c.telegramSupport} target="_blank" rel="noopener noreferrer" className={linkCls}>
-                  Savollar uchun: <span className="text-fog hover:text-white">{c.telegramSupportLabel}</span>
+                <a href={c.telegramSupport} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-2.5 text-sm text-smoke transition-colors hover:text-fog">
+                  <TelegramIcon className="size-4 shrink-0 text-sky-400" />
+                  <span>{t({ uz: "Savollar uchun:", ru: "По вопросам:" })}</span>
+                  <span className="font-medium text-fog group-hover:text-fog">{c.telegramSupportLabel}</span>
                 </a>
               </li>
               <li>
-                <a href={c.telegram} target="_blank" rel="noopener noreferrer" className={linkCls}>
-                  Telegram kanal: <span className="text-fog hover:text-white">{c.telegramLabel}</span>
+                <a href={c.telegram} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-2.5 text-sm text-smoke transition-colors hover:text-fog">
+                  <TelegramIcon className="size-4 shrink-0 text-sky-400" />
+                  <span>{t({ uz: "Telegram kanal:", ru: "Telegram канал:" })}</span>
+                  <span className="font-medium text-fog group-hover:text-fog">{c.telegramLabel}</span>
                 </a>
               </li>
               <li>
-                <a href={c.instagram} target="_blank" rel="noopener noreferrer" className={linkCls}>
-                  Instagram: <span className="text-fog hover:text-white">{c.instagramLabel}</span>
+                <a href={c.instagram} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-2.5 text-sm text-smoke transition-colors hover:text-fog">
+                  <InstagramIcon className="size-4 shrink-0 text-pink-400" />
+                  <span>Instagram:</span>
+                  <span className="font-medium text-fog group-hover:text-fog">{c.instagramLabel}</span>
                 </a>
               </li>
               <li>
-                <a href={c.youtube} target="_blank" rel="noopener noreferrer" className={linkCls}>
-                  YouTube: <span className="text-fog hover:text-white">{c.youtubeLabel}</span>
+                <a href={c.youtube} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-2.5 text-sm text-smoke transition-colors hover:text-fog">
+                  <YoutubeIcon className="size-4 shrink-0 text-red-500" />
+                  <span>YouTube:</span>
+                  <span className="font-medium text-fog group-hover:text-fog">{c.youtubeLabel}</span>
                 </a>
               </li>
-              <li>
-                <a
-                  href={c.mapUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-1 block text-xs leading-relaxed text-smoke transition-colors hover:text-white"
-                >
-                  📍 {c.address}
-                </a>
+              <li className="flex items-start gap-2.5 pt-1 text-xs text-smoke">
+                <MapPin className="size-4 shrink-0 text-smoke" strokeWidth={1.8} />
+                <span>{c.address}</span>
               </li>
-              <li className="text-xs text-ash">🕒 {c.hours}</li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-line pt-6 text-xs text-ash sm:flex-row sm:items-center sm:justify-between md:mt-16 md:pt-8">
-          <p>© {year} PRO DUCT. Barcha huquqlar himoyalangan.</p>
-          <p className="max-w-xl sm:text-right">
-            Apple, MacBook, iPhone, iPad, Apple Watch, AirPods va boshqa brend nomlari tegishli egalarining savdo belgilaridir.
-          </p>
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-line/60 pt-6 text-xs text-ash sm:flex-row">
+          <p>© {year} PRO DUCT. {t("footer.allRights")}</p>
+          <div className="flex items-center gap-2 text-smoke">
+            <Clock className="size-3.5 shrink-0 text-ash" strokeWidth={1.8} />
+            <span>{c.hours}</span>
+          </div>
         </div>
       </div>
     </footer>

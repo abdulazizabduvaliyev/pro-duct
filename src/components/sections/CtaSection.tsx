@@ -1,13 +1,14 @@
 "use client";
 
 import { useRef } from "react";
-import { ArrowRight, Phone, Send } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 import { site } from "@/lib/site";
 import { useParallax } from "@/components/animations/useParallax";
 import { useReveal } from "@/components/animations/useReveal";
 import { Button } from "@/components/ui/Button";
 import { OpenConsult } from "@/components/ui/OpenConsult";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { InstagramIcon, TelegramIcon, YoutubeIcon } from "@/components/ui/SocialIcons";
 
 /** Final premium call-to-action: catalogue or consultation. */
 export function CtaSection() {
@@ -51,42 +52,44 @@ export function CtaSection() {
           </div>
 
           <div data-reveal className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-smoke sm:mt-10 sm:gap-x-8 sm:text-sm">
-            <a href={site.contacts.phoneHref} className="inline-flex items-center gap-2 font-medium text-fog transition-colors hover:text-white">
-              <Phone className="size-4" strokeWidth={1.8} />
+            <a href={site.contacts.phoneHref} className="inline-flex items-center gap-2 font-medium text-fog transition-colors hover:text-fog/70">
+              <Phone className="size-4 shrink-0 text-smoke" strokeWidth={1.8} />
               {site.contacts.phone}
             </a>
             <a
               href={site.contacts.telegramSupport}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 transition-colors hover:text-white"
+              className="inline-flex items-center gap-2 transition-colors hover:text-fog"
             >
-              <Send className="size-4" strokeWidth={1.8} />
+              <TelegramIcon className="size-4 shrink-0 text-sky-400" />
               Savollar: {site.contacts.telegramSupportLabel}
             </a>
             <a
               href={site.contacts.telegram}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 transition-colors hover:text-white"
+              className="inline-flex items-center gap-2 transition-colors hover:text-fog"
             >
-              <Send className="size-4" strokeWidth={1.8} />
+              <TelegramIcon className="size-4 shrink-0 text-sky-400" />
               Kanal: {site.contacts.telegramLabel}
             </a>
             <a
               href={site.contacts.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 transition-colors hover:text-white"
+              className="inline-flex items-center gap-1.5 transition-colors hover:text-fog"
             >
+              <InstagramIcon className="size-4 shrink-0 text-pink-400" />
               Instagram
             </a>
             <a
               href={site.contacts.youtube}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 transition-colors hover:text-white"
+              className="inline-flex items-center gap-1.5 transition-colors hover:text-fog"
             >
+              <YoutubeIcon className="size-4 shrink-0 text-red-500" />
               YouTube
             </a>
           </div>
